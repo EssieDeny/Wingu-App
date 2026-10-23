@@ -1,88 +1,146 @@
-# Wingu ☁️ — the AZ-900 coach that knows when you're guessing
+# Wingu ☁️ — The AZ-900 Coach That Knows When You're Guessing
 
-> **Unofficial study tool.** Not affiliated with or endorsed by Microsoft. All questions are original, written against the public AZ-900 skills outline on Microsoft Learn (skills measured as of July 2026). No real exam questions are used.
+> **An unofficial study tool.** Wingu is not affiliated with or endorsed by Microsoft. Its original practice questions are designed around the public AZ-900 skills outline on Microsoft Learn (skills measured as of July 2026). It does not use real exam questions or Microsoft logos.
 
-*Wingu* means "cloud" in Swahili. Built for the PLP #1MillionDevs Vibe Coding Hackathon: AZ-900 Exam Prep Edition.
+Wingu means "cloud" in Swahili. Built for the PLP #1MillionDevs Vibe Coding Hackathon: AZ-900 Exam Prep Edition.
 
-**Live demo:** `https://<your-username>.github.io/wingu/`
-**Pitch deck:** `<link to your Canva deck>`
+**Live demo:** https://essiedeny.github.io/Wingu-App/  
+**Source code:** https://github.com/EssieDeny/Wingu-App  
+📄 [Pitch and demo notes](PITCH.md)  
+🧠 [Prompt engineering notes](PROMPTS.md)
+<!-- Add your presentation link here when the deck is ready, for example:
+🎤 [Pitch presentation](https://your-presentation-link)
+-->
+
 
 ---
 
 ## The problem
 
-When I studied for AZ-900, I kept "passing" practice quizzes without really knowing the material. A lucky guess counted the same as a real answer, so my scores looked better than my understanding. Explanations were dry, and I couldn't tell whether I was ready to book the exam.
+Preparing for a cloud fundamentals exam involves more than remembering definitions or selecting the correct answer. A learner can answer correctly by guessing and still misunderstand the underlying concept. Practice scores alone may not reveal that gap, and learners can struggle to decide which topics deserve more revision.
 
-*(Replace this paragraph with your own story: one specific moment from your AZ-900 prep.)*
+Wingu was designed around this learning problem. It helps learners reflect on their confidence, revisit incorrect answers and lucky guesses, and use progress across exam domains to guide their revision. The goal is to encourage genuine understanding rather than simply chasing a high quiz score.
 
 ## What Wingu does
 
-Wingu combines four hackathon challenges into one learning loop:
+Wingu brings five learning tools together in one study experience, covering four of the hackathon challenges plus a home dashboard that connects them:
 
-| Challenge | Wingu feature |
-|---|---|
-| 🏠 (all) | **Home dashboard:** estimated readiness, three domain cards, a "Your next challenge" card that picks your weakest topic, and one-tap entry to every tool. |
-| 📝 Smart Quiz Builder | **Practice:** 48 original questions across all three exam domains and 11 topics. Instant feedback, a clear explanation, and an everyday African analogy for every answer. |
-| 🧠 Flashcard Coach | **Review:** a Leitner-style spaced-repetition queue. Wrong answers *and* lucky guesses go into Box 1 and return until you answer them right and sure. |
-| 📊 Readiness Tracker | **Readiness:** a score weighted by each domain's share of the exam, plus per-domain bars, weakest topics, lucky guesses caught and a calibration stat ("right when you said Sure"). |
-| 📅 Study Planner | **Study plan:** enter your exam date and weekly hours; Wingu splits time by exam weight × your weakness and adds an exam-week routine. |
-| 🤖 AI Study Buddy | **Buddy prompt:** after any question, Wingu builds a tuned prompt with the question, your answer and your confidence, in your language (Swahili, Sheng, Yoruba, Hausa, isiZulu, Amharic and more) with examples from your country. |
+| Hackathon challenge | In the app | What it does |
+|---|---|---|
+| — | **Home** | Shows estimated readiness, progress in each of the three exam domains, a "Your next challenge" card that picks your weakest topic, and one-tap access to every tool. |
+| Smart Quiz Builder | **Practice** | Offers 48 original practice questions across three exam domains and 11 topics, with instant feedback, an explanation for every answer, and a relatable real-life example. Answer options are shuffled each time, and unseen questions come first. |
+| Flashcard Coach | **Review** | A spaced-repetition review queue with three boxes. Incorrect answers and lucky guesses go to Box 1 and return until you answer them correctly and confidently. Each card shows why it is back: *Wrong but sure*, *Missed last time* or *Lucky guess*. |
+| Readiness Tracker | **Readiness** | Estimates readiness using domain-weighted mastery, shows a score for each domain, highlights weaker topics, suggests next steps, and tracks confidence calibration ("Right when you said Sure"). |
+| Study Planner | **Study plan** | Uses your exam date, weekly study hours and weaker areas to build a week-by-week plan, with a "Start here" task and an exam-week routine. Tap any topic in the plan to practise it. |
+| AI Study Buddy | **Study buddy prompt** (inside each question) | Creates a ready-to-copy prompt using the question, your answer and your confidence level. You can choose the explanation language (English, Swahili, Sheng, Yoruba, Hausa, Igbo, isiZulu, Amharic, Luganda, Kinyarwanda or French) and the country for examples. |
 
-### The unique idea: confidence-aware scoring
+### The key idea: confidence-aware learning
 
-After choosing an answer, the learner taps **Sure**, **Think so** or **Guessing**.
+After answering a question, learners choose **Sure**, **Think so**, or **Guessing**. This adds context to the result instead of treating every correct answer as proof of mastery.
 
 | Result | Mastery value | What happens |
+|---|---:|---|
+| Correct + Sure | 1.0 | Moves up a review box |
+| Correct + Think so | 0.7 | Stays in Box 2 for another confidence check |
+| Correct + Guessing | 0.3 | Flagged as a lucky guess and returned to Box 1 |
+| Incorrect, any confidence | 0 | Returned to Box 1; incorrect answers marked Sure are flagged as a likely misconception |
+
+**How the numbers work**
+
+- Mastery for each question is the average of its last two attempts.
+- Domain mastery is the average mastery of all questions in that domain (unseen questions count as 0).
+- The readiness estimate weights each domain by the midpoint of its exam-weight range:
+
+| Exam domain | Exam weight | Weight used |
 |---|---|---|
-| Right + Sure | 1.0 | Moves up a review box |
-| Right + Think so | 0.7 | Stays in Box 2 for one more check |
-| Right + Guessing | 0.3 | **Lucky guess**: sent back to Box 1 |
-| Wrong (any) | 0 | Box 1; "wrong and sure" is flagged as a misconception |
+| Describe cloud concepts | 25–30% | 27.5 |
+| Describe Azure architecture and services | 35–40% | 37.5 |
+| Describe Azure management and governance | 30–35% | 32.5 |
 
-Mastery for each question is the average of its last two attempts. Readiness = Σ (domain mastery × domain weight), using the midpoints of the official ranges (25–30%, 35–40%, 30–35%). Wingu's "Book the exam" target is 80% overall and 70%+ in every domain — our own rule of thumb, not Microsoft's scoring.
+Wingu's suggested readiness target is an **80% overall estimate and at least 70% in each domain**. These are Wingu's own study guidelines, not Microsoft's official scoring or a guarantee of exam success. (The real exam is scored from 1 to 1,000, and 700 is needed to pass.)
 
-### Cultural touches
-- Every explanation ends with a real-life example: buying a minibus taxi versus paying per motorbike-taxi trip for CapEx vs OpEx, a mobile money PIN for MFA, a savings group's store for tags, county → ward → household for the Azure hierarchy.
-- A short proverb with a study tip changes daily in the sidebar (for example, "Fix the crack now, or rebuild the wall later").
+## Learning through relatable examples
 
-## Run it
+Wingu uses everyday examples to make cloud concepts easier to understand, including:
 
-It's a single HTML file with no build step and no backend.
+- Multi-factor authentication explained through a mobile money PIN.
+- Capital expenditure versus operating expenditure through transport choices: buying a minibus taxi versus paying per motorbike-taxi trip.
+- Azure resource hierarchy through familiar administrative structures: county → ward → household.
+- Resource tags through labelled boxes in a community savings group's store.
+- Short study tips and proverbs in the sidebar to encourage consistent revision.
+
+## Getting started
+
+Wingu is a static web app built with HTML, CSS, and JavaScript. It requires no build step or backend server.
+
+**Option 1: Run it locally**
+
+1. Download or clone the repository.
+2. Open `index.html` in a modern web browser.
+
+Or use a local server:
 
 ```bash
-git clone https://github.com/<your-username>/wingu.git
-cd wingu
-# open index.html in a browser, or:
-python3 -m http.server 8000   # then visit http://localhost:8000
+git clone https://github.com/EssieDeny/Wingu-App.git
+cd Wingu-App
+python3 -m http.server 8000
 ```
 
-**Deploy to GitHub Pages:** repo → Settings → Pages → Source: `main` branch, `/ (root)` → Save.
+Then open `http://localhost:8000` in your browser.
 
-**Tip for the demo:** go to Readiness → *Load sample progress* to show the dashboard and planner instantly.
+**Option 2: Use the live demo**
 
-Keyboard: `1–4` choose, `S` / `T` / `G` lock in confidence, `N` next.
+Visit https://essiedeny.github.io/Wingu-App/
 
-## Tech and structure
+**Deploying your own copy to GitHub Pages:** in the repository, go to **Settings → Pages**, set the source to the `main` branch and the `/ (root)` folder, then select **Save**.
 
-- Vanilla HTML, CSS and JavaScript in `index.html`, organized in six labelled sections: content, state, quiz runner, study buddy, views, events.
-- Progress is stored in `localStorage` (private to the learner's browser, works offline after first load).
-- App layout: left sidebar on laptops; compact top bar and bottom tab bar on phones, with no sideways scrolling.
-- Azure-and-navy design system defined as CSS tokens, with a matching dark mode, inline SVG icons and no image files.
-- Keyboard support, visible focus states and reduced-motion support.
-- Font: Plus Jakarta Sans (Google Fonts), with system fallbacks.
+**Demo tip:** for a presentation, select **Load a demo learner** on the Readiness page (it also appears on Home before any questions have been answered). This fills the dashboard, readiness report and study plan with example progress, so you can demonstrate them without completing a full quiz first. Use **Reset my progress** at the bottom of the page (tap twice to confirm) to start again.
+
+**Keyboard shortcuts:** `1`–`4` choose an answer, `S` / `T` / `G` choose Sure, Think so or Guessing, and `N` moves to the next question.
+
+## Technology and design
+
+- **Frontend:** Vanilla HTML, CSS, and JavaScript in a single `index.html`, with no framework or build step.
+- **Code structure:** the script is organised into six labelled sections: content (domains and questions), state, quiz runner, study buddy, views, and render and events.
+- **Storage:** Browser `localStorage` saves learner progress locally. The app works offline after the first load.
+- **Layout:** a left sidebar on laptops; a compact top bar and bottom tab bar on phones, with no sideways scrolling.
+- **Accessibility:** Keyboard support, visible focus states, and reduced-motion support.
+- **Appearance:** Azure-inspired colours defined as design tokens, a matching dark mode, inline SVG icons (no image files), and the Plus Jakarta Sans font with system-font fallbacks.
+
+Progress is stored in the learner's browser and is not synchronised between devices.
+
+## Project files
+
+| File | Purpose |
+|---|---|
+| `index.html` | The complete app: questions, logic, styles and layout |
+| `README.md` | This guide |
+| `PROMPTS.md` | Prompts used to write questions, check accuracy and power the study buddy |
+| `PITCH.md` | Slide-by-slide pitch script and live demo steps |
+| `LICENSE` | MIT License |
 
 ## How AI was used
 
-Built with **Claude** (claude.ai) as pair programmer and content reviewer. See [`PROMPTS.md`](PROMPTS.md) for the prompts used to draft questions, check accuracy against the skills outline, and power the study buddy.
+Claude (claude.ai) was used as a pair-programming and content-development assistant during the project. AI was used in three ways, each documented in [PROMPTS.md](PROMPTS.md):
 
-## Scaling beyond AZ-900
+1. **Question writer:** drafting original questions, explanations and examples against the AZ-900 skills outline.
+2. **Accuracy reviewer:** a separate review prompt that checks each answer key and explanation.
+3. **Study buddy prompt:** the prompt the app builds for learners to paste into an AI assistant.
 
-The question bank is a plain array with `domain`, `topic` and `weight`. Swapping in AI-900, SC-900 or AWS Cloud Practitioner means replacing `DOMAINS` and `QUESTIONS`; the scoring, review, readiness and planner work unchanged. Next steps: a Supabase backend for cohort leaderboards, a teacher view for PLP mentors, and community-submitted questions with peer review.
+The AI Study Buddy feature prepares a prompt for further exploration; it does not mean that a separate AI service is built into the app.
+
+## Future possibilities
+
+Wingu could be extended to support other entry-level cloud certifications, such as AI-900, SC-900 or AWS Cloud Practitioner, by replacing the `DOMAINS` and `QUESTIONS` data in `index.html`. The scoring, review queue, readiness estimate and study planner work unchanged with a new question bank.
+
+Possible future improvements include a backend (such as Supabase) for shared progress across devices, mentor dashboards for study groups, daily review reminders, and community-contributed questions reviewed for accuracy.
 
 ## Content accuracy
 
-Questions were written against the AZ-900 study guide on Microsoft Learn and reviewed for accuracy. If you find an error, open an issue with the question ID (e.g. `a14`).
+Practice questions are original learning materials informed by the AZ-900 skills outline (skills measured as of July 2026). Microsoft may update its exam objectives, so learners should also consult the current official study guide on Microsoft Learn.
+
+If you find an issue, please open a GitHub issue and include the relevant question ID where possible (for example, `a14`).
 
 ## Licence
 
-MIT. Azure, Microsoft Entra and related names are trademarks of Microsoft, used here only to describe exam topics. No Microsoft logos are used.
+This project is released under the MIT License. Microsoft, Azure, and Microsoft Entra are trademarks of Microsoft and are referenced only to describe the exam topics. No Microsoft logos are used.
