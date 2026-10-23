@@ -1,6 +1,6 @@
 # Wingu ☁️ — The AZ-900 Coach That Knows When You're Guessing
 
-> **An unofficial study tool.** Wingu is not affiliated with or endorsed by Microsoft. Its original practice questions are designed around the public AZ-900 skills outline on Microsoft Learn (skills measured as of July 2026). It does not use real exam questions or Microsoft logos.
+> **An unofficial study tool.** Wingu is not affiliated with or endorsed by Microsoft. Its original practice questions are designed around the public AZ-900 skills outline in the [official Microsoft AZ-900 study guide](https://learn.microsoft.com/credentials/certifications/resources/study-guides/az-900) (skills measured as of July 20, 2026). It does not use real exam questions or Microsoft logos.
 
 Wingu means "cloud" in Swahili. Built for the PLP #1MillionDevs Vibe Coding Hackathon: AZ-900 Exam Prep Edition.
 
@@ -8,10 +8,10 @@ Wingu means "cloud" in Swahili. Built for the PLP #1MillionDevs Vibe Coding Hack
 **Source code:** https://github.com/EssieDeny/Wingu-App  
 📄 [Pitch and demo notes](PITCH.md)  
 🧠 [Prompt engineering notes](PROMPTS.md)
+
 <!-- Add your presentation link here when the deck is ready, for example:
 🎤 [Pitch presentation](https://your-presentation-link)
 -->
-
 
 ---
 
@@ -45,19 +45,30 @@ After answering a question, learners choose **Sure**, **Think so**, or **Guessin
 | Correct + Guessing | 0.3 | Flagged as a lucky guess and returned to Box 1 |
 | Incorrect, any confidence | 0 | Returned to Box 1; incorrect answers marked Sure are flagged as a likely misconception |
 
-**How the numbers work**
+### How the readiness estimate is calculated
 
 - Mastery for each question is the average of its last two attempts.
 - Domain mastery is the average mastery of all questions in that domain (unseen questions count as 0).
-- The readiness estimate weights each domain by the midpoint of its exam-weight range:
+- Each domain is given the midpoint of its official exam-weight range. These midpoints total 97.5, so the code **normalises** them: each weight is divided by 97.5 before it is applied. The effective weights therefore add up to 100%.
 
-| Exam domain | Exam weight | Weight used |
-|---|---|---|
-| Describe cloud concepts | 25–30% | 27.5 |
-| Describe Azure architecture and services | 35–40% | 37.5 |
-| Describe Azure management and governance | 30–35% | 32.5 |
+| Exam domain | Official weight range | Midpoint used | Effective weight after normalising |
+|---|---|---:|---:|
+| Describe cloud concepts | 25–30% | 27.5 | 28.2% |
+| Describe Azure architecture and services | 35–40% | 37.5 | 38.5% |
+| Describe Azure management and governance | 30–35% | 32.5 | 33.3% |
 
-Wingu's suggested readiness target is an **80% overall estimate and at least 70% in each domain**. These are Wingu's own study guidelines, not Microsoft's official scoring or a guarantee of exam success. (The real exam is scored from 1 to 1,000, and 700 is needed to pass.)
+In the code (`readiness()` in `index.html`):
+
+```js
+const total = Object.values(DOMAINS).reduce((s, d) => s + d.w, 0); // 97.5
+return Object.entries(DOMAINS).reduce((s, [k, d]) => s + domainMastery(k) * d.w / total, 0);
+```
+
+A learner with full mastery in every domain therefore scores exactly 100%.
+
+Wingu's suggested readiness target is an **80% overall estimate and at least 70% in each domain**. These are Wingu's own study guidelines, not Microsoft's scoring, and they do not guarantee exam success.
+
+**About the real exam score:** Microsoft reports technical exam scores on a scale of 1 to 1,000, and a passing score is **700 or greater**. Because this is a scaled score, 700 does not necessarily equal 70% of the available points. See Microsoft's [exam scoring and score reports](https://learn.microsoft.com/en-us/certifications/exam-scoring-reports) page.
 
 ## Learning through relatable examples
 
@@ -121,7 +132,7 @@ Progress is stored in the learner's browser and is not synchronised between devi
 
 ## How AI was used
 
-Claude (claude.ai) was used as a pair-programming and content-development assistant during the project. AI was used in three ways, each documented in [PROMPTS.md](PROMPTS.md):
+Claude (claude.ai) was used as a pair-programming and content-development assistant during the project. AI was used in three ways, each documented in the [prompt engineering notes](PROMPTS.md):
 
 1. **Question writer:** drafting original questions, explanations and examples against the AZ-900 skills outline.
 2. **Accuracy reviewer:** a separate review prompt that checks each answer key and explanation.
@@ -137,7 +148,7 @@ Possible future improvements include a backend (such as Supabase) for shared pro
 
 ## Content accuracy
 
-Practice questions are original learning materials informed by the AZ-900 skills outline (skills measured as of July 2026). Microsoft may update its exam objectives, so learners should also consult the current official study guide on Microsoft Learn.
+Practice questions are original learning materials informed by the AZ-900 skills outline in the [official Microsoft AZ-900 study guide](https://learn.microsoft.com/credentials/certifications/resources/study-guides/az-900) (skills measured as of July 20, 2026). Microsoft may update its exam objectives, so learners should also consult the current version of that study guide.
 
 If you find an issue, please open a GitHub issue and include the relevant question ID where possible (for example, `a14`).
 
