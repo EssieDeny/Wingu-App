@@ -1,0 +1,1392 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wingu AZ-900 Coach</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Wingu: an unofficial AZ-900 study coach with confidence-aware practice, spaced review, a readiness estimate and a study planner, explained with everyday African examples.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: app shell — fixed left sidebar on desktop, compact top bar + bottom tab bar on phones; spacious card-based main column. */
+:root {
+  --bg: #F7F8FC;
+  --surface: #FFFFFF;
+  --surface-2: #F1F4FA;
+  --soft: #EAF2FF;
+  --fg: #172033;
+  --muted: #586179;
+  --faint: #8A93A8;
+  --line: #E2E7F1;
+  --primary: #3563E9;
+  --primary-hover: #2950C9;
+  --on-primary: #FFFFFF;
+  --ring: rgba(53, 99, 233, 0.16);
+  --cyan: #38BDF8;
+  --good: #15934A;
+  --good-soft: #E6F6EC;
+  --bad: #DC4448;
+  --bad-soft: #FDECEC;
+  --warn: #C26A05;
+  --warn-soft: #FFF3DD;
+  --d1: #0A8FB8; --d1-soft: #E0F5FC;
+  --d2: #3563E9; --d2-soft: #EAF0FF;
+  --d3: #5B57D1; --d3-soft: #EEEDFC;
+  --shadow: 0 1px 2px rgba(23, 32, 51, 0.04), 0 8px 24px -12px rgba(23, 32, 51, 0.12);
+  --shadow-lift: 0 2px 4px rgba(23, 32, 51, 0.05), 0 14px 32px -14px rgba(23, 32, 51, 0.22);
+  --hero: radial-gradient(120% 140% at 100% 0%, rgba(56, 189, 248, 0.55) 0%, rgba(56, 189, 248, 0) 55%), linear-gradient(135deg, #1B2F7A 0%, #2A4FCB 55%, #3563E9 100%);
+  --font: "Plus Jakarta Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --r-lg: 20px; --r-md: 14px; --r-sm: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0A1020; --surface: #111A2E; --surface-2: #17213A; --soft: #172650; --fg: #E8EDF7; --muted: #A4AEC4; --faint: #737E96; --line: #233050;
+    --primary: #6A8DFF; --primary-hover: #86A3FF; --on-primary: #0A1020; --ring: rgba(106, 141, 255, 0.22); --cyan: #4CC9FF;
+    --good: #3FCF84; --good-soft: #0F2E21; --bad: #FF7B7F; --bad-soft: #391719; --warn: #F5B347; --warn-soft: #36270D;
+    --d1: #4CC9FF; --d1-soft: #0E2B3B; --d2: #6A8DFF; --d2-soft: #17244A; --d3: #A09CFF; --d3-soft: #221F4A;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 28px -14px rgba(0, 0, 0, 0.6);
+    --shadow-lift: 0 2px 4px rgba(0, 0, 0, 0.35), 0 16px 36px -14px rgba(0, 0, 0, 0.7);
+    --hero: radial-gradient(120% 140% at 100% 0%, rgba(76, 201, 255, 0.35) 0%, rgba(76, 201, 255, 0) 55%), linear-gradient(135deg, #12204F 0%, #1E3A9E 60%, #2C55D6 100%);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0A1020; --surface: #111A2E; --surface-2: #17213A; --soft: #172650; --fg: #E8EDF7; --muted: #A4AEC4; --faint: #737E96; --line: #233050;
+  --primary: #6A8DFF; --primary-hover: #86A3FF; --on-primary: #0A1020; --ring: rgba(106, 141, 255, 0.22); --cyan: #4CC9FF;
+  --good: #3FCF84; --good-soft: #0F2E21; --bad: #FF7B7F; --bad-soft: #391719; --warn: #F5B347; --warn-soft: #36270D;
+  --d1: #4CC9FF; --d1-soft: #0E2B3B; --d2: #6A8DFF; --d2-soft: #17244A; --d3: #A09CFF; --d3-soft: #221F4A;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 10px 28px -14px rgba(0, 0, 0, 0.6);
+  --shadow-lift: 0 2px 4px rgba(0, 0, 0, 0.35), 0 16px 36px -14px rgba(0, 0, 0, 0.7);
+  --hero: radial-gradient(120% 140% at 100% 0%, rgba(76, 201, 255, 0.35) 0%, rgba(76, 201, 255, 0) 55%), linear-gradient(135deg, #12204F 0%, #1E3A9E 60%, #2C55D6 100%);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { background: var(--bg); color: var(--fg); }
+body { margin: 0; font-family: var(--font); font-size: 15.5px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--primary); outline-offset: 2px; border-radius: 6px; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { text-wrap: balance; letter-spacing: -0.015em; }
+.num { font-variant-numeric: tabular-nums; }
+.ico { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.ico.sm { width: 16px; height: 16px; }
+.ico.lg { width: 24px; height: 24px; }
+
+/* ---------- App shell ---------- */
+.app { display: grid; grid-template-columns: 264px minmax(0, 1fr); min-height: 100vh; }
+.sidebar { position: sticky; top: 0; height: 100vh; overflow-y: auto; background: var(--surface); border-right: 1px solid var(--line); padding: 24px 16px 20px; display: flex; flex-direction: column; gap: 24px; }
+.brand { display: flex; align-items: center; gap: 12px; padding: 0 8px; text-decoration: none; color: inherit; border: 0; background: none; text-align: left; }
+.brand-mark { width: 40px; height: 40px; border-radius: 12px; background: linear-gradient(140deg, #3563E9, #38BDF8); display: grid; place-items: center; box-shadow: 0 6px 16px -6px rgba(53, 99, 233, 0.6); flex: none; }
+.brand-mark svg { width: 24px; height: 24px; fill: #fff; }
+.brand-name { font-weight: 800; font-size: 1.25rem; letter-spacing: -0.02em; line-height: 1.1; }
+.brand-sub { font-size: 0.78rem; color: var(--muted); font-weight: 500; }
+.nav { display: grid; gap: 4px; }
+.nav-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; color: var(--faint); padding: 0 12px 6px; }
+.nav button { display: flex; align-items: center; gap: 12px; width: 100%; border: 0; background: none; padding: 10px 12px; border-radius: var(--r-sm); font-weight: 600; color: var(--muted); text-align: left; transition: background .15s, color .15s; }
+.nav button:hover { background: var(--surface-2); color: var(--fg); }
+.nav button[aria-current="page"] { background: var(--soft); color: var(--primary); }
+.nav .badge { margin-left: auto; }
+.badge { font-size: 0.72rem; font-weight: 700; min-width: 22px; text-align: center; padding: 1px 7px; border-radius: 999px; background: var(--warn-soft); color: var(--warn); font-variant-numeric: tabular-nums; }
+.badge.zero { background: var(--surface-2); color: var(--faint); }
+.side-foot { margin-top: auto; display: grid; gap: 12px; }
+.proverb { background: var(--surface-2); border-radius: var(--r-md); padding: 14px; display: grid; gap: 4px; }
+.proverb .k { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--faint); }
+.proverb b { font-size: 0.88rem; line-height: 1.4; }
+.proverb span { font-size: 0.82rem; color: var(--muted); line-height: 1.4; }
+.unofficial { display: inline-flex; align-items: center; gap: 6px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; white-space: nowrap; }
+.unofficial::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--warn); }
+
+.topbar { display: none; }
+.bottomnav { display: none; }
+
+.main-inner { max-width: 1120px; margin: 0 auto; padding-block: 36px 56px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 28px; }
+@media (min-width: 901px) { .main-inner { padding-left: 44px; padding-right: 44px; } }
+
+@media (max-width: 900px) {
+  .app { grid-template-columns: minmax(0, 1fr); }
+  .sidebar { display: none; }
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); }
+  .topbar { display: flex; position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+  .topbar .brand { padding: 0; }
+  .topbar .brand-mark { width: 34px; height: 34px; border-radius: 10px; }
+  .topbar .brand-mark svg { width: 20px; height: 20px; }
+  .topbar .brand-name { font-size: 1.1rem; }
+  .bottomnav { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); position: fixed; left: 0; right: 0; bottom: 0; z-index: 9; background: color-mix(in srgb, var(--surface) 94%, transparent); backdrop-filter: blur(12px); border-top: 1px solid var(--line); padding-top: 6px; padding-bottom: max(6px, env(safe-area-inset-bottom, 0px)); padding-left: max(4px, env(safe-area-inset-left, 0px)); padding-right: max(4px, env(safe-area-inset-right, 0px)); }
+  .bottomnav button { border: 0; background: none; display: grid; justify-items: center; gap: 2px; padding: 6px 2px; font-size: 0.7rem; font-weight: 600; color: var(--faint); border-radius: var(--r-sm); position: relative; min-width: 0; }
+  .bottomnav button[aria-current="page"] { color: var(--primary); }
+  .bottomnav button[aria-current="page"] .ico { stroke-width: 2.3; }
+  .bottomnav .dot { position: absolute; top: 2px; left: calc(50% + 6px); font-size: 0.62rem; font-weight: 800; background: var(--warn); color: var(--surface); border-radius: 999px; padding: 0 5px; line-height: 1.5; }
+  .main-inner { padding-block: 20px calc(96px + env(safe-area-inset-bottom, 0px)); gap: 22px; }
+}
+
+/* ---------- Shared components ---------- */
+.page-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 20px; }
+.page-head h1 { font-size: clamp(1.5rem, 3vw, 1.9rem); font-weight: 800; line-height: 1.2; }
+.page-head p { color: var(--muted); max-width: 62ch; margin-top: 6px; }
+.eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--faint); }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 24px; box-shadow: var(--shadow); min-width: 0; }
+.card h2 { font-size: 1.1rem; font-weight: 700; }
+.card-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 1100px) { .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .grid-3, .grid-2 { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 480px) { .grid-4 { grid-template-columns: minmax(0, 1fr); } }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 12px; padding: 11px 18px; font-weight: 700; font-size: 0.95rem; border: 1.5px solid transparent; transition: background .15s, border-color .15s, transform .15s, box-shadow .15s; white-space: nowrap; text-decoration: none; }
+.btn-primary { background: var(--primary); color: var(--on-primary); box-shadow: 0 6px 16px -8px var(--primary); }
+.btn-primary:hover { background: var(--primary-hover); }
+.btn-ghost { background: var(--surface); border-color: var(--line); color: var(--fg); }
+.btn-ghost:hover { border-color: var(--primary); color: var(--primary); }
+.btn-white { background: #FFFFFF; color: #1B2F7A; }
+.btn-white:hover { background: #EAF2FF; }
+.btn-glass { background: rgba(255, 255, 255, 0.14); color: #FFFFFF; border-color: rgba(255, 255, 255, 0.3); }
+.btn-glass:hover { background: rgba(255, 255, 255, 0.22); }
+.btn-lg { padding: 13px 22px; font-size: 1rem; }
+.btn-link { border: 0; background: none; color: var(--primary); font-weight: 700; padding: 0; display: inline-flex; align-items: center; gap: 6px; }
+.btn-link:hover { text-decoration: underline; }
+.btn-small { padding: 7px 12px; font-size: 0.85rem; border-radius: 10px; }
+
+.pill { display: inline-flex; align-items: center; gap: 6px; font-size: 0.78rem; font-weight: 700; border-radius: 999px; padding: 4px 11px; white-space: nowrap; }
+.pill.plain { background: var(--surface-2); color: var(--muted); }
+.pill.d-d1 { background: var(--d1-soft); color: var(--d1); }
+.pill.d-d2 { background: var(--d2-soft); color: var(--d2); }
+.pill.d-d3 { background: var(--d3-soft); color: var(--d3); }
+.pill.ok { background: var(--good-soft); color: var(--good); }
+.pill.mid { background: var(--warn-soft); color: var(--warn); }
+.pill.no { background: var(--bad-soft); color: var(--bad); }
+.pill.new { background: var(--surface-2); color: var(--muted); }
+
+.bar { height: 8px; background: var(--surface-2); border-radius: 999px; overflow: hidden; position: relative; }
+.bar > b { display: block; height: 100%; border-radius: 999px; background: var(--fill, var(--primary)); }
+.bar .goal { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--faint); opacity: .6; }
+
+.icon-tile { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--soft); color: var(--primary); flex: none; }
+.icon-tile.cyan { background: var(--d1-soft); color: var(--d1); }
+.icon-tile.indigo { background: var(--d3-soft); color: var(--d3); }
+.icon-tile.warn { background: var(--warn-soft); color: var(--warn); }
+.icon-tile.good { background: var(--good-soft); color: var(--good); }
+
+/* ---------- Home ---------- */
+.hero { position: relative; overflow: hidden; border-radius: 24px; background: var(--hero); color: #FFFFFF; padding: clamp(24px, 4vw, 40px); display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 28px; align-items: center; box-shadow: 0 20px 40px -24px rgba(27, 47, 122, 0.7); }
+.hero-copy { display: grid; gap: 14px; position: relative; z-index: 1; }
+.hero .greet { font-weight: 600; opacity: .85; font-size: 0.95rem; }
+.hero h1 { font-size: clamp(1.75rem, 4vw, 2.6rem); font-weight: 800; line-height: 1.12; letter-spacing: -0.03em; }
+.hero h1 em { font-style: normal; background: linear-gradient(90deg, #BFE9FF, #FFFFFF); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero p.sub { opacity: .88; max-width: 48ch; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+.hero-stat { position: relative; z-index: 1; justify-self: end; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.22); backdrop-filter: blur(8px); border-radius: 20px; padding: 20px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 16px; align-items: center; width: min(100%, 340px); }
+.hero-stat .lbl { font-size: 0.72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; opacity: .8; }
+.hero-stat .msg { font-weight: 600; font-size: 0.95rem; line-height: 1.4; }
+.hero-stat .note { font-size: 0.78rem; opacity: .75; }
+.hero-cloud { position: absolute; right: -40px; bottom: -50px; width: 360px; opacity: .22; pointer-events: none; }
+@media (max-width: 820px) { .hero { grid-template-columns: minmax(0, 1fr); } .hero-stat { justify-self: stretch; width: 100%; } }
+
+.domain-card { display: grid; gap: 12px; border-top: 4px solid var(--dc); }
+.domain-card .row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.domain-card h3 { font-size: 1rem; font-weight: 700; }
+.domain-card .pct { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em; color: var(--dc); }
+.domain-card .meta { font-size: 0.85rem; color: var(--muted); display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+
+.challenge { display: grid; gap: 16px; background: linear-gradient(160deg, var(--soft), var(--surface) 70%); }
+.challenge .topic { font-size: 1.35rem; font-weight: 800; letter-spacing: -0.02em; }
+.challenge p { color: var(--muted); }
+.mini-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.mini-stat { background: var(--surface-2); border-radius: var(--r-md); padding: 14px; display: grid; gap: 2px; min-width: 0; }
+.mini-stat .v { font-size: 1.45rem; font-weight: 800; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.mini-stat .l { font-size: 0.8rem; color: var(--muted); line-height: 1.35; }
+@media (max-width: 420px) { .mini-stats { grid-template-columns: minmax(0, 1fr); } }
+
+.feature { display: grid; gap: 12px; align-content: start; text-align: left; border: 1px solid var(--line); background: var(--surface); border-radius: var(--r-lg); padding: 20px; box-shadow: var(--shadow); transition: transform .18s, box-shadow .18s, border-color .18s; color: inherit; }
+.feature:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); border-color: color-mix(in srgb, var(--primary) 40%, var(--line)); }
+.feature h3 { font-size: 1.02rem; font-weight: 700; }
+.feature p { color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+.feature .foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 700; color: var(--primary); margin-top: 4px; }
+.feature .foot span:first-child { color: var(--muted); font-weight: 600; }
+
+.empty { display: grid; justify-items: center; text-align: center; gap: 12px; padding: 36px 20px; }
+.empty .art { width: 120px; }
+.empty p { color: var(--muted); max-width: 46ch; }
+
+/* ---------- Practice ---------- */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { display: inline-flex; align-items: center; gap: 8px; border: 1.5px solid var(--line); background: var(--surface); border-radius: 999px; padding: 7px 14px; font-weight: 600; font-size: 0.88rem; color: var(--muted); transition: border-color .15s, color .15s, background .15s; }
+.chip:hover { border-color: var(--primary); color: var(--fg); }
+.chip[aria-pressed="true"] { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+.chip .w { font-weight: 500; opacity: .75; font-size: 0.8rem; }
+.chip.topic { background: var(--soft); border-color: transparent; color: var(--primary); }
+
+.quiz-layout { display: grid; grid-template-columns: minmax(0, 1fr) 290px; gap: 24px; align-items: start; }
+@media (max-width: 1150px) { .quiz-layout { grid-template-columns: minmax(0, 1fr); } }
+.quiz { padding: clamp(20px, 3.5vw, 36px); display: grid; gap: 22px; }
+.quiz-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.quiz-top .labels { display: flex; gap: 8px; flex-wrap: wrap; min-width: 0; }
+.qnum { font-size: 0.85rem; font-weight: 700; color: var(--muted); font-variant-numeric: tabular-nums; }
+.qtext { font-size: clamp(1.15rem, 2.4vw, 1.4rem); font-weight: 700; line-height: 1.45; letter-spacing: -0.01em; max-width: 60ch; }
+.opts { display: grid; gap: 10px; }
+.opt { display: grid; grid-template-columns: 38px minmax(0, 1fr) 22px; gap: 14px; align-items: center; width: 100%; text-align: left; padding: 14px 16px; border: 1.5px solid var(--line); border-radius: var(--r-md); background: var(--surface); font-size: 1rem; font-weight: 500; line-height: 1.45; transition: border-color .15s, box-shadow .15s, background .15s, transform .15s; }
+.opt .key { width: 38px; height: 38px; border-radius: 11px; background: var(--surface-2); display: grid; place-items: center; font-weight: 800; font-size: 0.9rem; color: var(--muted); transition: background .15s, color .15s; }
+.opt .mark { color: transparent; display: grid; place-items: center; }
+.opt:hover:not([disabled]) { border-color: var(--primary); box-shadow: 0 0 0 4px var(--ring); }
+.opt:hover:not([disabled]) .key { background: var(--soft); color: var(--primary); }
+.opt.picked { border-color: var(--primary); background: var(--soft); box-shadow: 0 0 0 4px var(--ring); }
+.opt.picked .key { background: var(--primary); color: var(--on-primary); }
+.opt.right { border-color: var(--good); background: var(--good-soft); }
+.opt.right .key { background: var(--good); color: var(--surface); }
+.opt.right .mark { color: var(--good); }
+.opt.wrong { border-color: var(--bad); background: var(--bad-soft); }
+.opt.wrong .key { background: var(--bad); color: var(--surface); }
+.opt.wrong .mark { color: var(--bad); }
+.opt.dim { opacity: .55; }
+.opt[disabled] { cursor: default; }
+
+.conf { display: grid; gap: 14px; padding: 20px; border-radius: var(--r-lg); background: var(--surface-2); border: 1px dashed var(--line); }
+.conf-title { font-weight: 700; font-size: 1.02rem; }
+.conf-sub { color: var(--muted); font-size: 0.9rem; }
+.conf-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 600px) { .conf-row { grid-template-columns: minmax(0, 1fr); } }
+.conf-btn { --c: var(--primary); --cs: var(--soft); display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; text-align: left; padding: 14px; border-radius: var(--r-md); border: 1.5px solid var(--line); background: var(--surface); transition: border-color .15s, box-shadow .15s, transform .15s; }
+.conf-btn.c-sure { --c: var(--good); --cs: var(--good-soft); }
+.conf-btn.c-guess { --c: var(--warn); --cs: var(--warn-soft); }
+.conf-btn .ci { width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; background: var(--cs); color: var(--c); }
+.conf-btn b { display: block; font-size: 0.98rem; }
+.conf-btn small { display: block; color: var(--muted); font-size: 0.82rem; line-height: 1.3; }
+.conf-btn:hover { border-color: var(--c); box-shadow: 0 0 0 4px color-mix(in srgb, var(--c) 18%, transparent); }
+kbd { font-family: inherit; font-size: 0.72rem; font-weight: 700; color: var(--faint); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 6px; padding: 1px 6px; background: var(--surface); }
+@media (hover: none) { .conf-btn kbd, .opt kbd { display: none; } }
+
+.feedback { display: grid; gap: 18px; }
+.verdict { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px; align-items: start; padding: 16px 18px; border-radius: var(--r-md); }
+.verdict .vi { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--vc); color: var(--surface); }
+.verdict b { display: block; font-size: 1.02rem; color: var(--vc); }
+.verdict p { font-size: 0.93rem; color: var(--fg); opacity: .85; }
+.verdict.v-ok { --vc: var(--good); background: var(--good-soft); }
+.verdict.v-bad { --vc: var(--bad); background: var(--bad-soft); }
+.verdict.v-warn { --vc: var(--warn); background: var(--warn-soft); }
+.why h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+.why p { color: var(--fg); max-width: 68ch; }
+.tip { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px; padding: 18px; border-radius: var(--r-md); background: linear-gradient(135deg, var(--d1-soft), var(--soft)); border: 1px solid color-mix(in srgb, var(--d1) 22%, transparent); }
+.tip .ti { width: 38px; height: 38px; border-radius: 11px; background: var(--surface); color: var(--d1); display: grid; place-items: center; box-shadow: var(--shadow); }
+.tip .tl { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; color: var(--d1); margin-bottom: 2px; }
+.fb-actions { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; padding-top: 4px; }
+@media (max-width: 480px) { .fb-actions .btn { width: 100%; } .fb-actions { flex-direction: column-reverse; align-items: stretch; } }
+
+.buddy { display: grid; gap: 14px; padding: 20px; border-radius: var(--r-lg); background: var(--surface-2); }
+.buddy-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; align-items: start; }
+.buddy-head p { color: var(--muted); font-size: 0.9rem; }
+.buddy-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+@media (max-width: 480px) { .buddy-row { grid-template-columns: minmax(0, 1fr); } }
+.field { display: grid; gap: 6px; font-size: 0.82rem; font-weight: 700; color: var(--muted); }
+select, input[type="date"], input[type="number"] { width: 100%; border: 1.5px solid var(--line); background: var(--surface); border-radius: 12px; padding: 10px 12px; font-size: 0.95rem; color: var(--fg); font-weight: 600; }
+select:focus, input:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 4px var(--ring); }
+textarea.prompt { width: 100%; min-height: 200px; border: 1.5px solid var(--line); border-radius: 12px; background: var(--surface); padding: 14px; font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 0.78rem; line-height: 1.55; resize: vertical; color: var(--fg); }
+.buddy-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.side-panel { display: grid; gap: 16px; position: sticky; top: 24px; }
+@media (max-width: 1150px) { .side-panel { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .side-panel { grid-template-columns: minmax(0, 1fr); } }
+.side-panel .card { padding: 20px; display: grid; gap: 12px; }
+.side-panel h3 { font-size: 0.95rem; font-weight: 700; }
+.dots { display: flex; flex-wrap: wrap; gap: 5px; }
+.dots i { width: 14px; height: 14px; border-radius: 5px; background: var(--surface-2); }
+.dots i.r { background: var(--good); } .dots i.l { background: var(--warn); } .dots i.w { background: var(--bad); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 0.8rem; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 10px; height: 10px; border-radius: 3px; }
+.keys { display: grid; gap: 8px; font-size: 0.85rem; color: var(--muted); }
+.keys div { display: flex; justify-content: space-between; gap: 8px; }
+
+/* ---------- Review (internally "rudia") ---------- */
+.boxes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 560px) { .boxes { grid-template-columns: minmax(0, 1fr); } }
+.box { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px; align-items: center; padding: 18px; }
+.box .v { font-size: 1.6rem; font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.box .l { font-size: 0.85rem; color: var(--muted); }
+.reason { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; align-items: center; padding: 12px 14px; border-radius: var(--r-md); background: var(--rc-soft); }
+.reason .ri { color: var(--rc); }
+.reason b { color: var(--rc); }
+.reason p { font-size: 0.9rem; color: var(--fg); opacity: .85; }
+.reason.r-bad { --rc: var(--bad); --rc-soft: var(--bad-soft); }
+.reason.r-warn { --rc: var(--warn); --rc-soft: var(--warn-soft); }
+.stack-bar { display: flex; height: 10px; border-radius: 999px; overflow: hidden; background: var(--surface-2); }
+.stack-bar i { display: block; height: 100%; }
+
+/* ---------- Readiness ---------- */
+.ready-hero { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 28px; align-items: center; }
+@media (max-width: 620px) { .ready-hero { grid-template-columns: minmax(0, 1fr); justify-items: start; } }
+.ready-hero h2 { font-size: 1.4rem; font-weight: 800; }
+.ready-hero p { color: var(--muted); }
+.estimate { display: flex; gap: 10px; align-items: start; font-size: 0.85rem; color: var(--muted); background: var(--surface-2); border-radius: var(--r-sm); padding: 10px 12px; }
+.ring text { font-family: var(--font); }
+.list { display: grid; gap: 0; }
+.list-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.list-row:last-child { border-bottom: 0; padding-bottom: 0; }
+.list-row:first-child { padding-top: 0; }
+.list-row .t { font-weight: 700; }
+.list-row .s { font-size: 0.82rem; color: var(--muted); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 2px; }
+.steps { display: grid; gap: 12px; counter-reset: s; }
+.step { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 12px; align-items: start; }
+.step .n { counter-increment: s; width: 28px; height: 28px; border-radius: 50%; background: var(--soft); color: var(--primary); font-weight: 800; font-size: 0.85rem; display: grid; place-items: center; }
+.step .n::before { content: counter(s); }
+.step p { font-size: 0.93rem; }
+
+/* ---------- Plan ---------- */
+.plan-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)) minmax(0, 1.2fr); gap: 16px; align-items: end; }
+@media (max-width: 760px) { .plan-form { grid-template-columns: minmax(0, 1fr); } }
+.plan-sum { display: flex; gap: 8px; flex-wrap: wrap; }
+.start-here { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 16px; align-items: center; background: var(--hero); color: #FFFFFF; border: 0; }
+.start-here .eyebrow { color: rgba(255, 255, 255, 0.75); }
+.start-here h2 { font-size: 1.2rem; }
+.start-here p { opacity: .85; font-size: 0.92rem; }
+.start-here .icon-tile { background: rgba(255, 255, 255, 0.15); color: #FFFFFF; }
+@media (max-width: 620px) { .start-here { grid-template-columns: minmax(0, 1fr); } }
+.timeline { display: grid; gap: 0; }
+.wk { display: grid; grid-template-columns: 46px minmax(0, 1fr); gap: 16px; }
+.wk .rail { display: grid; justify-items: center; grid-template-rows: auto 1fr; }
+.wk .node { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; background: var(--soft); color: var(--primary); font-variant-numeric: tabular-nums; }
+.wk.final .node { background: var(--good-soft); color: var(--good); }
+.wk .line { width: 2px; background: var(--line); margin: 6px 0; }
+.wk:last-child .line { display: none; }
+.wk .body { padding-bottom: 26px; display: grid; gap: 10px; min-width: 0; }
+.wk .body h3 { font-size: 1.02rem; font-weight: 700; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; padding-top: 8px; }
+.wk .body h3 span { font-size: 0.85rem; color: var(--muted); font-weight: 600; }
+.task { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px 14px; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface); }
+.task .tt { font-weight: 700; font-size: 0.95rem; }
+.task .ts { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 2px; font-size: 0.82rem; color: var(--muted); }
+.task .hrs { font-weight: 800; font-variant-numeric: tabular-nums; color: var(--muted); font-size: 0.9rem; }
+.task .ck { color: var(--faint); }
+.wk-note { font-size: 0.85rem; color: var(--muted); }
+
+/* ---------- Footer, toast, motion ---------- */
+.disclaimer { font-size: 0.8rem; color: var(--faint); display: grid; gap: 6px; border-top: 1px solid var(--line); padding-top: 20px; }
+.disclaimer .row { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; }
+.toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--fg); color: var(--bg); padding: 11px 18px; border-radius: 12px; font-weight: 700; z-index: 30; box-shadow: var(--shadow-lift); display: flex; gap: 8px; align-items: center; max-width: calc(100vw - 32px); }
+@media (max-width: 900px) { .toast { bottom: calc(86px + env(safe-area-inset-bottom, 0px)); } }
+[hidden] { display: none !important; }
+@media (max-width: 520px) {
+  .quiz { padding: 18px 14px; gap: 18px; }
+  .opt { grid-template-columns: 32px minmax(0, 1fr) 18px; gap: 10px; padding: 12px; font-size: 0.97rem; }
+  .opt .key { width: 32px; height: 32px; border-radius: 9px; }
+  .conf { padding: 14px; }
+  .card { padding: 18px; }
+}
+.section-title { font-size: 1.15rem; font-weight: 800; }
+@media (hover: none) { .keys-card { display: none; } }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (prefers-reduced-motion: no-preference) {
+  .fresh { animation: rise .35s ease-out; }
+  .feedback, .conf, .buddy { animation: rise .3s ease-out; }
+  @keyframes rise { from { transform: translateY(8px); opacity: .5; } to { transform: none; opacity: 1; } }
+  .bar > b { transition: width .7s cubic-bezier(.2, .7, .2, 1); }
+  .float { animation: float 7s ease-in-out infinite; }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gCloud" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3563E9"/><stop offset="1" stop-color="#38BDF8"/></linearGradient>
+  </defs>
+</svg>
+
+<div class="app">
+  <aside class="sidebar" aria-label="Wingu">
+    <button class="brand" data-view="home" aria-label="Wingu home">
+      <span class="brand-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 19a4.7 4.7 0 0 1-.8-9.33 6 6 0 0 1 11.5-1.4A5.4 5.4 0 0 1 17.3 19z"/></svg></span>
+      <span><span class="brand-name">Wingu</span><br><span class="brand-sub">AZ-900 study coach</span></span>
+    </button>
+    <nav class="nav" aria-label="Main">
+      <p class="nav-label">Learn</p>
+      <button data-view="home"><svg class="ico" viewBox="0 0 24 24"><use href="#i-home"/></svg>Home</button>
+      <button data-view="practice"><svg class="ico" viewBox="0 0 24 24"><use href="#i-practice"/></svg>Practice</button>
+      <button data-view="rudia"><svg class="ico" viewBox="0 0 24 24"><use href="#i-rudia"/></svg>Review <span class="badge rudia-count">0</span></button>
+      <p class="nav-label" style="margin-top:14px">Track</p>
+      <button data-view="ready"><svg class="ico" viewBox="0 0 24 24"><use href="#i-gauge"/></svg>Readiness</button>
+      <button data-view="plan"><svg class="ico" viewBox="0 0 24 24"><use href="#i-calendar"/></svg>Study plan</button>
+    </nav>
+    <div class="side-foot">
+      <div class="proverb"><span class="k">Today's proverb</span><b class="jina-sw">Little by little fills the measure.</b><span class="jina-en">Short daily study sessions add up.</span></div>
+      <span class="unofficial">Unofficial study tool</span>
+    </div>
+  </aside>
+
+  <header class="topbar">
+    <button class="brand" data-view="home" aria-label="Wingu home">
+      <span class="brand-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.2 19a4.7 4.7 0 0 1-.8-9.33 6 6 0 0 1 11.5-1.4A5.4 5.4 0 0 1 17.3 19z"/></svg></span>
+      <span class="brand-name">Wingu</span>
+    </button>
+    <span class="unofficial">Unofficial</span>
+  </header>
+
+  <main id="main">
+    <div class="main-inner">
+      <div id="view"></div>
+      <footer class="disclaimer">
+        <p>Wingu is an unofficial, community-built study aid. It is not affiliated with or endorsed by Microsoft. Every question is original and written against the public AZ-900 skills outline (skills measured as of July 2026) on Microsoft Learn. No real exam questions are used.</p>
+        <div class="row"><span>Your progress is saved in this browser only.</span><button class="btn btn-ghost btn-small" data-action="reset">Reset my progress</button></div>
+      </footer>
+    </div>
+  </main>
+
+  <nav class="bottomnav" aria-label="Main">
+    <button data-view="home"><svg class="ico" viewBox="0 0 24 24"><use href="#i-home"/></svg>Home</button>
+    <button data-view="practice"><svg class="ico" viewBox="0 0 24 24"><use href="#i-practice"/></svg>Practice</button>
+    <button data-view="rudia"><svg class="ico" viewBox="0 0 24 24"><use href="#i-rudia"/></svg>Review<span class="dot rudia-dot" hidden>0</span></button>
+    <button data-view="ready"><svg class="ico" viewBox="0 0 24 24"><use href="#i-gauge"/></svg>Ready</button>
+    <button data-view="plan"><svg class="ico" viewBox="0 0 24 24"><use href="#i-calendar"/></svg>Plan</button>
+  </nav>
+</div>
+
+<!-- Icon sprite: simple stroked icons, drawn for Wingu -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3.5 10.5 12 3.5l8.5 7V19a1.5 1.5 0 0 1-1.5 1.5h-4v-6h-6v6H5A1.5 1.5 0 0 1 3.5 19z"/></symbol>
+  <symbol id="i-practice" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="m8.5 12.2 2.4 2.4 4.8-5"/></symbol>
+  <symbol id="i-rudia" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14.3-4.8L4 8"/><path d="M4 3.5V8h4.5"/><path d="M4 13a8 8 0 0 0 14.3 4.8L20 16"/><path d="M20 20.5V16h-4.5"/></symbol>
+  <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4.2 18.5a9 9 0 1 1 15.6 0"/><path d="m12 14 4-4.5"/><circle cx="12" cy="14" r="1.2"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.8 10.6c.7.6 1 1.4 1 2.4h5.6c0-1 .3-1.8 1-2.4A6 6 0 0 0 12 3z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 8.5v4.5M12 16.5v.3"/><path d="M10.3 4.2 2.8 17.5A2 2 0 0 0 4.5 20.5h15a2 2 0 0 0 1.7-3L13.7 4.2a2 2 0 0 0-3.4 0z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20.5 12a8.5 8.5 0 0 1-12.4 7.5L3.5 20.5l1-4.4A8.5 8.5 0 1 1 20.5 12z"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8.5" y="8.5" width="12" height="12" rx="2.5"/><path d="M15.5 8.5V6A2.5 2.5 0 0 0 13 3.5H6A2.5 2.5 0 0 0 3.5 6v7A2.5 2.5 0 0 0 6 15.5h2.5"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="0.8"/></symbol>
+  <symbol id="i-think" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 14.5c1 1.2 2.2 1.7 3.5 1.7s2.5-.5 3.5-1.7M9 9.8h.01M15 9.8h.01"/></symbol>
+  <symbol id="i-dice" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><path d="M8.5 8.5h.01M15.5 15.5h.01M12 12h.01M15.5 8.5h.01M8.5 15.5h.01"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4.5h11l-2 4 2 4H5"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3.5l1.9 5.1 5.1 1.9-5.1 1.9L12 17.5l-1.9-5.1L5 10.5l5.1-1.9z"/><path d="M18.5 16.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3.5 3.5 8 12 12.5 20.5 8z"/><path d="m3.5 12.5 8.5 4.5 8.5-4.5M3.5 16.5 12 21l8.5-4.5"/></symbol>
+</svg>
+
+<script>
+/* ============================================================
+   1. CONTENT — domains mapped to the AZ-900 skills outline
+   ============================================================ */
+const DOMAINS = {
+  d1: { name: "Cloud concepts", weight: "25–30%", w: 27.5,
+        topics: ["Cloud computing", "Benefits of the cloud", "Service types"] },
+  d2: { name: "Azure architecture & services", weight: "35–40%", w: 37.5,
+        topics: ["Core architecture", "Compute & networking", "Storage", "Identity & security"] },
+  d3: { name: "Management & governance", weight: "30–35%", w: 32.5,
+        topics: ["Cost management", "Governance & compliance", "Managing & deploying", "Monitoring"] }
+};
+
+/* Original questions. a = index of correct option. */
+const QUESTIONS = [
+  // ---------- Domain 1: Cloud concepts ----------
+  { id: "c1", d: "d1", t: "Cloud computing",
+    q: "Your school moves its email to a SaaS product. Under the shared responsibility model, which of these stays the school's responsibility?",
+    o: ["Physical security of the datacenter", "Patching the email server's operating system", "The accounts, identities and data the school puts in it", "Replacing failed network switches"], a: 2,
+    why: "In every service type (IaaS, PaaS and SaaS) the customer always keeps responsibility for its information and data, the devices that connect, and its accounts and identities. The provider takes on the physical datacenter, network and, in SaaS, the operating system and application.",
+    an: "Renting a fully furnished apartment: the landlord fixes the roof and the plumbing, but locking your own suitcase and deciding who gets a key is still on you." },
+  { id: "c2", d: "d1", t: "Cloud computing",
+    q: "A startup pays for Azure each month based only on what it used. How is this spending usually classified?",
+    o: ["Capital expenditure (CapEx)", "Operational expenditure (OpEx)", "Depreciation", "Fixed cost"], a: 1,
+    why: "The consumption-based model turns IT into an operating expense: no large upfront purchase, you pay as you use and can stop paying when you stop using. CapEx is an upfront spend on physical assets, such as buying servers.",
+    an: "Buying your own minibus taxi is CapEx: a big upfront cost and you carry the maintenance. Paying per trip on a motorbike taxi is OpEx: you pay only when you ride." },
+  { id: "c3", d: "d1", t: "Cloud computing",
+    q: "A bank must keep customer records in its own datacenter by regulation, but wants to use public cloud computing for heavy month-end reports. Which cloud model fits?",
+    o: ["Public cloud", "Private cloud", "Hybrid cloud", "Community cloud"], a: 2,
+    why: "Hybrid cloud combines private (on-premises) infrastructure with public cloud, so sensitive data can stay in-house while extra capacity comes from the public cloud when needed.",
+    an: "A family that farms its own land but rents a neighbour's extra field at harvest time. The core stays yours; you borrow capacity when the season peaks." },
+  { id: "c4", d: "d1", t: "Cloud computing",
+    q: "Which statement best describes a private cloud?",
+    o: ["Cloud resources used exclusively by one organization", "Any cloud that requires a password", "A public cloud with encryption turned on", "Cloud services that are free to use"], a: 0,
+    why: "A private cloud is used by a single organization. It can sit in that organization's own datacenter or be hosted by a third party, but it is not shared with other customers. That gives control at the cost of buying and maintaining the hardware.",
+    an: "A private borehole on your compound versus the county water supply. Only your household draws from it, and you also pay to maintain the pump." },
+  { id: "c5", d: "d1", t: "Cloud computing",
+    q: "What is a key feature of serverless computing, such as Azure Functions?",
+    o: ["You manage the VM's operating system yourself", "You are billed for a server even when no code runs", "Code runs in response to events and you don't manage servers", "It only works on-premises"], a: 2,
+    why: "With serverless, the cloud provider runs and scales the servers for you. Your code runs when an event triggers it (an HTTP request, a timer, a new file), and on consumption plans you pay for execution time rather than idle servers.",
+    an: "Calling a plumber only when the tap leaks. You don't keep a plumber on salary; you pay for the job when it happens." },
+  { id: "c6", d: "d1", t: "Benefits of the cloud",
+    q: "On results day, a national exam portal adds more web server instances to cope with traffic, then removes them later. Which cloud benefit is this?",
+    o: ["Scalability", "Sovereignty", "Fault tolerance through backups", "Governance"], a: 0,
+    why: "Scalability is adjusting resources to meet demand. Adding more instances is scaling out (horizontal scaling); giving one machine more CPU or memory is scaling up (vertical scaling). Scaling back down when demand falls helps control cost.",
+    an: "A bank opening extra teller windows on the last Friday of the month, then closing them on Monday. Same bank, more counters only when the queue is long." },
+  { id: "c7", d: "d1", t: "Benefits of the cloud",
+    q: "A cloud service's SLA promises 99.95% uptime. Which benefit does this describe most directly?",
+    o: ["Manageability", "High availability", "Elasticity of pricing", "Data sovereignty"], a: 1,
+    why: "High availability means keeping a service accessible with minimal downtime. Azure publishes Service Level Agreements (SLAs) that state the uptime it commits to for each service, often depending on how you configure it.",
+    an: "A hospital with a backup generator that kicks in when the grid goes off. Patients barely notice the power cut because the service keeps running." },
+  { id: "c8", d: "d1", t: "Benefits of the cloud",
+    q: "Which is an example of the predictability benefit of the cloud?",
+    o: ["Using autoscaling and cost forecasting tools so performance and spending are known in advance", "Buying servers five years ahead", "Removing all monitoring", "Running every workload on one large VM"], a: 0,
+    why: "Predictability covers performance (autoscaling, load balancing and high availability keep apps responsive) and cost (tools to track, forecast and estimate spending). Together they let you plan with confidence.",
+    an: "A school fee schedule printed at the start of the year. Parents can plan their budgets because they know what each term will cost." },
+  { id: "c9", d: "d1", t: "Service types",
+    q: "A company wants to lift-and-shift an old app to the cloud and still needs full control of the operating system. Which service type fits best?",
+    o: ["SaaS", "PaaS", "IaaS", "Serverless"], a: 2,
+    why: "Infrastructure as a service gives you virtual machines, storage and networking while you manage the operating system, runtime and app. It is the most flexible type and a common choice for lift-and-shift migrations.",
+    an: "Renting an empty shop on Moi Avenue. The landlord gives you the walls, power and water; the shelves, stock and how you run it are your choice." },
+  { id: "c10", d: "d1", t: "Service types",
+    q: "Developers want to deploy a web app without patching servers or managing the operating system. Which service type fits best?",
+    o: ["IaaS", "PaaS", "On-premises", "Private cloud"], a: 1,
+    why: "Platform as a service (for example Azure App Service) manages the infrastructure, operating system and runtime. Developers focus on their code and data.",
+    an: "Cooking in a commercial shared kitchen. The stoves, gas and cleaning are handled; you just bring your recipe and ingredients." },
+  { id: "c11", d: "d1", t: "Service types",
+    q: "A community savings group uses a ready-made online accounting app through the browser and pays a monthly subscription. Which service type is this?",
+    o: ["SaaS", "PaaS", "IaaS", "Hybrid cloud"], a: 0,
+    why: "Software as a service is a complete application delivered over the internet, like email or office suites. The provider runs everything; you configure it and manage your users and data.",
+    an: "Taking a minibus taxi instead of driving. Someone else owns the vehicle, employs the driver and fuels it; you just get on and pay your fare." },
+
+  // ---------- Domain 2: Architecture & services ----------
+  { id: "a1", d: "d2", t: "Core architecture",
+    q: "Which Azure feature protects an app from the failure of a single datacenter while staying inside one region?",
+    o: ["Availability zones", "Region pairs", "Resource groups", "Management groups"], a: 0,
+    why: "Availability zones are physically separate locations within an Azure region, each with independent power, cooling and networking. Spreading resources across zones keeps an app running if one datacenter fails. Region pairs are for region-wide disasters.",
+    an: "Keeping your savings in three different branches of the same bank in one city. If one branch floods, the other two still serve you." },
+  { id: "a2", d: "d2", t: "Core architecture",
+    q: "What is a main benefit of Azure region pairs?",
+    o: ["They make data transfer between regions free", "They help with recovery from a region-wide outage, and planned updates roll out to one region of a pair at a time", "They double the storage capacity of a subscription", "They replace the need for availability zones"], a: 1,
+    why: "Many Azure regions are paired with another region in the same geography, usually far apart. If a large disaster takes down one region, services can fail over to the pair, and Azure staggers planned updates so both regions aren't affected at once. Note that some newer regions have no pair and rely on availability zones.",
+    an: "A family that keeps copies of title deeds with relatives in another town. A fire in one home doesn't wipe out the documents." },
+  { id: "a3", d: "d2", t: "Core architecture",
+    q: "What are Azure sovereign regions, such as Azure Government?",
+    o: ["Regions reserved for free-tier customers", "Instances of Azure isolated from the main public cloud for compliance or legal reasons", "Regions that only host SaaS apps", "Backup copies of every other region"], a: 1,
+    why: "Sovereign regions are separate instances of Azure, physically and logically isolated from the main public cloud, used where legal or compliance needs demand it. Examples are Azure Government in the US and Azure in China, operated by a local partner.",
+    an: "A government records office with its own guarded building and staff, separate from the public library even though both store documents." },
+  { id: "a4", d: "d2", t: "Core architecture",
+    q: "Which order shows the Azure hierarchy from broadest to narrowest?",
+    o: ["Resource groups → subscriptions → management groups → resources", "Management groups → subscriptions → resource groups → resources", "Subscriptions → management groups → resources → resource groups", "Resources → resource groups → subscriptions → management groups"], a: 1,
+    why: "Management groups organize subscriptions; subscriptions contain resource groups; resource groups contain resources. Settings such as Azure Policy and access assignments applied at a higher level are inherited by everything below.",
+    an: "County → sub-county → ward → household. A rule announced at county level reaches every household underneath it." },
+  { id: "a5", d: "d2", t: "Core architecture",
+    q: "What happens when you delete an Azure resource group?",
+    o: ["Only the empty group is removed; resources move to a default group", "All resources inside it are deleted too", "The subscription is cancelled", "Resources are archived for 90 days automatically"], a: 1,
+    why: "A resource group is a logical container, and deleting it deletes every resource inside. Each resource belongs to exactly one resource group at a time, which is why grouping by lifecycle (for example, everything for one project) makes clean-up easy.",
+    an: "Throwing away a whole box of files instead of sorting it. Everything inside the box goes with it, so label your boxes carefully." },
+  { id: "a6", d: "d2", t: "Compute & networking",
+    q: "You need a group of identical, load-balanced VMs that automatically increase or decrease in number based on demand. What should you use?",
+    o: ["Availability sets", "Azure Virtual Machine Scale Sets", "Azure Virtual Desktop", "A single larger VM"], a: 1,
+    why: "Virtual Machine Scale Sets create and manage a group of identical, load-balanced VMs and can scale the count automatically using rules or a schedule.",
+    an: "A motorbike taxi stand where the organiser calls in more riders when the queue grows and sends some home when it's quiet. Same bikes, same routes, changing numbers." },
+  { id: "a7", d: "d2", t: "Compute & networking",
+    q: "Which option spreads VMs across fault domains and update domains so a single rack failure or maintenance event doesn't take them all down?",
+    o: ["Availability set", "Resource lock", "Azure Arc", "Management group"], a: 0,
+    why: "An availability set groups VMs across fault domains (separate power and network hardware, like different racks) and update domains (groups rebooted at different times during maintenance).",
+    an: "A choir that never puts all its sopranos on the same bus. If one bus breaks down, the song still has every voice." },
+  { id: "a8", d: "d2", t: "Compute & networking",
+    q: "A call centre wants staff to log into a full Windows desktop from cheap devices, with the desktop running in Azure. What should it use?",
+    o: ["Azure Functions", "Azure Virtual Desktop", "Azure DNS", "Azure Storage Explorer"], a: 1,
+    why: "Azure Virtual Desktop provides desktop and app virtualization in the cloud. Users connect from almost any device while the desktop, apps and data live and run in Azure.",
+    an: "A cyber café where every computer opens your own saved desktop. The machine in front of you is just a window; your work lives somewhere else." },
+  { id: "a9", d: "d2", t: "Compute & networking",
+    q: "You have three options to run an app: VMs, containers and functions. Which is the most lightweight way to package an app with its dependencies, without a full guest OS per instance?",
+    o: ["Virtual machines", "Containers", "Availability zones", "ExpressRoute"], a: 1,
+    why: "Containers package an app and its dependencies and share the host's operating system kernel, so they start fast and use fewer resources than VMs. VMs include a full operating system each; functions run event-driven code without you managing either.",
+    an: "Shipping goods in standard containers on the Mombasa–Nairobi railway. Each box holds everything it needs, and the same train carries many of them." },
+  { id: "a10", d: "d2", t: "Compute & networking",
+    q: "Two Azure virtual networks need to talk to each other privately over the Microsoft backbone. What should you configure?",
+    o: ["Virtual network peering", "A public IP on every VM", "Azure DNS only", "A resource lock"], a: 0,
+    why: "Virtual network peering connects two VNets so their resources communicate with private IP addresses. Traffic stays on the Microsoft backbone network rather than the public internet.",
+    an: "Opening a gate in the fence between two neighbouring compounds. The families visit each other without walking out onto the main road." },
+  { id: "a11", d: "d2", t: "Compute & networking",
+    q: "A bank needs a private, dedicated connection from its datacenter to Azure that does not go over the public internet. Which service fits?",
+    o: ["Azure VPN Gateway", "ExpressRoute", "Azure DNS", "VNet peering"], a: 1,
+    why: "ExpressRoute provides a private connection between on-premises networks and Azure through a connectivity provider, so traffic doesn't cross the public internet. A VPN Gateway sends encrypted traffic, but over the public internet.",
+    an: "A VPN is a locked van using the public highway. ExpressRoute is a private road built just for your company's deliveries." },
+  { id: "a12", d: "d2", t: "Compute & networking",
+    q: "What does a private endpoint do for an Azure service such as a storage account?",
+    o: ["Gives the service a private IP address inside your virtual network", "Makes the service free", "Publishes the service to the internet", "Deletes public data automatically"], a: 0,
+    why: "A private endpoint is a network interface with a private IP from your virtual network, connecting you privately to an Azure service. A public endpoint is reachable over the internet.",
+    an: "Having a staff-only door from the office straight into the supplies store, instead of queuing at the public counter outside." },
+  { id: "a13", d: "d2", t: "Storage",
+    q: "A hospital must keep old X-ray images for years. They are almost never read, and waiting several hours to retrieve one is acceptable. Which access tier costs least to store them?",
+    o: ["Hot", "Cool", "Cold", "Archive"], a: 3,
+    why: "The Archive tier has the lowest storage cost and the highest retrieval cost. Data is offline and must be rehydrated before it can be read, which can take hours. Hot, Cool and Cold keep data online with rising minimum storage periods and falling storage prices.",
+    an: "Storing old harvest records in a locked trunk in the village store. Cheap to keep there, but someone has to go and fetch the key when you need one." },
+  { id: "a14", d: "d2", t: "Storage",
+    q: "Data must stay in its primary region for legal reasons, but survive the loss of a whole datacenter. Which redundancy option fits?",
+    o: ["Locally redundant storage (LRS)", "Zone-redundant storage (ZRS)", "Geo-redundant storage (GRS)", "No redundancy"], a: 1,
+    why: "ZRS copies data synchronously across three availability zones in the primary region, so it survives a datacenter failure without leaving the region. LRS keeps three copies in one datacenter; GRS also copies data to a second region.",
+    an: "Keeping copies of your ID in three different rooms of the same office building. A fire in one room isn't fatal, and nothing leaves the building." },
+  { id: "a15", d: "d2", t: "Storage",
+    q: "An organization must move 80 TB of data to Azure, but its internet connection is slow. What is the most practical option?",
+    o: ["AzCopy over the existing link", "Azure Data Box", "Azure File Sync", "Email the files"], a: 1,
+    why: "Azure Data Box is a physical device Microsoft ships to you. You load your data and ship it back, and it is uploaded into Azure. It suits large transfers where the network is too slow or costly.",
+    an: "Moving house with a lorry instead of a hundred motorbike trips. When the load is big and the road is narrow, one big physical delivery wins." },
+  { id: "a16", d: "d2", t: "Storage",
+    q: "A company wants its on-premises Windows file server to keep a local cache while syncing files with Azure Files. Which tool does this?",
+    o: ["Azure File Sync", "Azure Migrate", "Azure Data Box", "Azure Advisor"], a: 0,
+    why: "Azure File Sync centralizes file shares in Azure Files while keeping a local cache on Windows file servers, so frequently used files stay fast to open.",
+    an: "A shop that keeps its best-selling items on the counter but restocks from the main warehouse whenever something runs low." },
+  { id: "a17", d: "d2", t: "Identity & security",
+    q: "What is Microsoft Entra ID?",
+    o: ["A virtual machine image", "Microsoft's cloud-based identity and access management service", "A storage redundancy option", "A cost reporting dashboard"], a: 1,
+    why: "Microsoft Entra ID (formerly Azure Active Directory) manages identities and access in the cloud: sign-in, multifactor authentication, single sign-on, app access and more.",
+    an: "The national ID registry for your organization's apps. Every app checks with it before letting you in." },
+  { id: "a18", d: "d2", t: "Identity & security",
+    q: "A user signs in with a password and then approves a prompt on their phone. What authentication method is this?",
+    o: ["Single sign-on", "Multifactor authentication", "Resource locks", "Role-based access control"], a: 1,
+    why: "Multifactor authentication requires two or more types of proof: something you know (password), something you have (phone) or something you are (fingerprint). Single sign-on is about using one identity for many apps.",
+    an: "Withdrawing mobile money: you need the phone in your hand and your PIN. A thief with only one of them can't take your cash." },
+  { id: "a19", d: "d2", t: "Identity & security",
+    q: "An admin wants a staff member to manage VMs only in one resource group, and nothing else. What should the admin use?",
+    o: ["Azure RBAC with a VM role assigned at the resource group scope", "Make them Owner of the subscription", "Azure Policy", "A resource lock"], a: 0,
+    why: "Azure role-based access control (RBAC) assigns roles to users at a scope (management group, subscription, resource group or resource). Assigning the narrowest scope that works follows the principle of least privilege. Azure Policy controls what resources can look like, not who can do what.",
+    an: "Giving the cleaner a key only to the offices on floor 3, not the master key to the building." },
+  { id: "a20", d: "d2", t: "Identity & security",
+    q: "Which three principles define the Zero Trust model?",
+    o: ["Trust the internal network, block the internet, log everything", "Verify explicitly, use least-privilege access, assume breach", "Encrypt, compress, back up", "Allow, deny, audit"], a: 1,
+    why: "Zero Trust assumes no request is safe just because of where it comes from. Every request is verified using all available signals, users get only the access they need, and systems are designed assuming an attacker may already be inside.",
+    an: "A school gate that checks every visitor's ID, even people who look familiar, and only lets them into the block they came to visit." },
+  { id: "a21", d: "d2", t: "Identity & security",
+    q: "In the defense-in-depth model, which layer sits at the centre and is what all other layers protect?",
+    o: ["Physical security", "Perimeter", "Network", "Data"], a: 3,
+    why: "Defense in depth stacks layers, from physical security on the outside through identity and access, perimeter, network, compute and application, to data at the centre. If one layer is breached, the next one still protects the data.",
+    an: "A family safe inside a locked bedroom, inside a house with a gate and a guard dog. A thief who gets past the gate still has more to get through." },
+  { id: "a22", d: "d2", t: "Identity & security",
+    q: "A company wants to require MFA only when staff sign in from an unfamiliar country. Which feature makes that decision?",
+    o: ["Microsoft Entra Conditional Access", "Azure Policy", "Azure Service Health", "Tags"], a: 0,
+    why: "Conditional Access uses signals such as user, location, device and app to decide whether to allow access, require MFA or block. It works as if-then rules on sign-in.",
+    an: "A watchman who lets regulars straight in, but asks strangers arriving at midnight to call their host first." },
+  { id: "a23", d: "d2", t: "Identity & security",
+    q: "Which service assesses your Azure and hybrid workloads, gives a security posture score and helps protect them from threats?",
+    o: ["Microsoft Defender for Cloud", "Azure Arc", "Azure Data Box", "Azure DNS"], a: 0,
+    why: "Microsoft Defender for Cloud is a security posture management and threat protection tool. It monitors resources across Azure, on-premises and other clouds and recommends fixes.",
+    an: "A building inspector who walks around every week, lists what's unsafe and raises the alarm if someone breaks in." },
+
+  // ---------- Domain 3: Management & governance ----------
+  { id: "m1", d: "d3", t: "Cost management",
+    q: "A finance team wants to see Azure costs broken down by department. What should admins add to resources?",
+    o: ["Tags such as Department: Finance", "Resource locks", "Availability zones", "A second subscription for every VM"], a: 0,
+    why: "Tags are name-value pairs added to resources and resource groups. They help organize resources and report costs by department, project or environment in Cost Management.",
+    an: "Labelling every box in the savings group's store with the member's name, so at the end of the month you know whose goods took up space." },
+  { id: "m2", d: "d3", t: "Cost management",
+    q: "Before deploying anything, you want an estimate of the monthly cost of two VMs and a database. Which tool should you use?",
+    o: ["Azure pricing calculator", "Azure Service Health", "Azure Monitor alerts", "Microsoft Purview"], a: 0,
+    why: "The pricing calculator estimates the cost of Azure services you plan to use, based on options like region, size and tier. Cost Management tracks what you actually spend after deployment.",
+    an: "Getting a quotation from the builder before building. You know the rough bill before the first brick is laid." },
+  { id: "m3", d: "d3", t: "Cost management",
+    q: "Which of these is generally free in Azure?",
+    o: ["Inbound data transfer into Azure datacenters", "Outbound data transfer to the internet", "Running a VM 24/7", "Premium storage"], a: 0,
+    why: "Data going into Azure (ingress) is generally free. Outbound data (egress) and data moving between regions are usually charged, which is one of the factors that affect cost, along with resource type, consumption and region.",
+    an: "A market that lets traders bring goods in for free, but charges at the gate when lorries leave loaded." },
+  { id: "m4", d: "d3", t: "Cost management",
+    q: "You want an email when your team's Azure spending reaches 80% of the monthly limit. What should you set up?",
+    o: ["A budget with alerts in Cost Management", "A ReadOnly resource lock", "A management group", "Azure DNS"], a: 0,
+    why: "Microsoft Cost Management lets you analyse spending, create budgets and trigger alerts when costs reach thresholds you set.",
+    an: "Asking your bank to text you when your account drops below a set balance, before you overspend." },
+  { id: "m5", d: "d3", t: "Governance & compliance",
+    q: "Your organization must only deploy resources in two specific regions. How can you enforce this automatically?",
+    o: ["Azure Policy", "Tags", "Azure Advisor", "Azure Cloud Shell"], a: 0,
+    why: "Azure Policy creates and enforces rules on resources, such as allowed regions or required tags. Non-compliant deployments can be denied, and existing resources are evaluated for compliance.",
+    an: "County building rules: plans that break the rules are rejected at approval, before construction starts." },
+  { id: "m6", d: "d3", t: "Governance & compliance",
+    q: "How can you stop anyone, including subscription Owners, from accidentally deleting a production database while still allowing changes?",
+    o: ["Apply a CanNotDelete (Delete) resource lock", "Apply a ReadOnly lock", "Remove all tags", "Move it to a new region"], a: 0,
+    why: "A Delete lock (CanNotDelete) allows reading and modifying but blocks deletion. A ReadOnly lock blocks changes too. Locks apply to everyone regardless of role, and must be removed before a locked action can happen.",
+    an: "A padlock on the church's offering box: anyone can drop money in, but nobody walks off with the box, not even the treasurer, until the lock is removed." },
+  { id: "m7", d: "d3", t: "Governance & compliance",
+    q: "Which service helps discover, classify and govern data across Azure, on-premises and other clouds?",
+    o: ["Microsoft Purview", "Azure Virtual Desktop", "Azure File Sync", "Application Insights"], a: 0,
+    why: "Microsoft Purview is a family of data governance, risk and compliance solutions. It helps map where data lives, classify sensitive information and manage compliance.",
+    an: "A land registry that maps every plot, records who owns it and flags which parcels are protected." },
+  { id: "m8", d: "d3", t: "Managing & deploying",
+    q: "You want to run Azure CLI commands from a browser without installing anything. What should you use?",
+    o: ["Azure Cloud Shell", "Azure Data Box", "Azure Arc", "ExpressRoute"], a: 0,
+    why: "Azure Cloud Shell is a browser-based shell with Bash or PowerShell and tools like the Azure CLI already installed and authenticated. You can open it from the Azure portal.",
+    an: "Using a shared computer at a cyber café that already has every tool installed and logged in. No setup on your own laptop." },
+  { id: "m9", d: "d3", t: "Managing & deploying",
+    q: "A company has servers on-premises and in another cloud, and wants to manage and govern them from Azure. Which service fits?",
+    o: ["Azure Arc", "Azure Functions", "Azure Data Box", "Zone-redundant storage"], a: 0,
+    why: "Azure Arc extends Azure management, such as Azure Policy, tags and monitoring, to resources outside Azure: on-premises servers, Kubernetes clusters and other clouds.",
+    an: "One SACCO app that shows balances from your accounts at several different banks, so you manage everything from one place." },
+  { id: "m10", d: "d3", t: "Managing & deploying",
+    q: "What best describes ARM templates?",
+    o: ["Declarative JSON files that define the infrastructure to deploy, repeatably", "Scripts that only run on Linux", "A monitoring dashboard", "A type of storage tier"], a: 0,
+    why: "Azure Resource Manager templates are infrastructure as code. You declare what you want in JSON (Bicep is a simpler alternative syntax), and Resource Manager deploys it the same way every time.",
+    an: "A standard house plan approved once and reused for every unit in an estate. Each house comes out the same without redrawing." },
+  { id: "m11", d: "d3", t: "Managing & deploying",
+    q: "Through which service do the Azure portal, Azure CLI, PowerShell and templates all send their requests to create or change resources?",
+    o: ["Azure Resource Manager", "Azure Advisor", "Microsoft Purview", "Azure DNS"], a: 0,
+    why: "Azure Resource Manager is the deployment and management service for Azure. Every tool sends its requests through it, so authentication, RBAC, policy and locks are applied consistently.",
+    an: "Every route into town passes through the same toll station, so the same rules apply whether you came by bus, car or lorry." },
+  { id: "m12", d: "d3", t: "Monitoring",
+    q: "Which service gives personalized recommendations across reliability, security, performance, operational excellence and cost?",
+    o: ["Azure Advisor", "Azure Service Health", "Azure Arc", "Microsoft Entra ID"], a: 0,
+    why: "Azure Advisor analyses your deployed resources and suggests improvements in five categories: reliability, security, performance, operational excellence and cost.",
+    an: "An experienced mentor who looks at your shop and says: move this shelf, lock that door, and stop paying for the empty storeroom." },
+  { id: "m13", d: "d3", t: "Monitoring",
+    q: "You want to know whether an Azure outage in your region is affecting the services you use. Where should you look?",
+    o: ["Azure Service Health", "Azure pricing calculator", "Tags", "Azure Policy"], a: 0,
+    why: "Azure Service Health shows Azure service issues, planned maintenance and health advisories that affect your services and regions, and can alert you about them.",
+    an: "The power company's outage notice for your area, rather than a news report about blackouts across the whole country." },
+  { id: "m14", d: "d3", t: "Monitoring",
+    q: "A developer wants to track a web app's response times, failed requests and usage. Which Azure Monitor feature fits best?",
+    o: ["Application Insights", "Resource locks", "Azure Data Box", "Management groups"], a: 0,
+    why: "Application Insights, part of Azure Monitor, monitors live web applications: performance, failures, dependencies and user behaviour. Log Analytics is used to query collected log data, and alerts notify you when conditions are met.",
+    an: "A shop that counts how long each customer waits at the till and how many walk out before paying." }
+];
+
+const JINA = [
+  ["Little by little fills the measure.", "Short daily study sessions add up."],
+  ["One who goes slowly does not stumble.", "Read every question carefully before you answer."],
+  ["Fix the crack now, or rebuild the wall later.", "Clear your review queue while the gaps are small."],
+  ["If you won't learn at home, the world will teach you.", "Practise here so the exam holds no surprises."],
+  ["Chip by chip, the log is finished.", "Every question you answer moves you forward."]
+];
+
+/* ============================================================
+   2. STATE — saved to this browser only
+   ============================================================ */
+const STORE_KEY = "wingu-az900-v1";
+const CONF = { sure: { label: "Sure", hint: "I'd bet on it", v: 1 }, think: { label: "Think so", hint: "Fairly confident", v: 0.7 }, guess: { label: "Guessing", hint: "Coin toss", v: 0.3 } };
+
+function freshState() { return { log: [], boxes: {} }; }
+function load() { try { const s = JSON.parse(localStorage.getItem(STORE_KEY)); if (s && Array.isArray(s.log)) return s; } catch (e) {} return freshState(); }
+let state = load();
+function save() { try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {} }
+
+const byId = Object.fromEntries(QUESTIONS.map(q => [q.id, q]));
+const attempts = id => state.log.filter(r => r.id === id);
+
+/* Mastery: average of the last two attempts. Right+sure = 1, right+think = .7, right+guess = .3, wrong = 0. */
+function mastery(id) {
+  const a = attempts(id).slice(-2);
+  if (!a.length) return 0;
+  return a.reduce((s, r) => s + (r.ok ? CONF[r.conf].v : 0), 0) / a.length;
+}
+function groupMastery(filterFn) {
+  const qs = QUESTIONS.filter(filterFn);
+  return qs.length ? qs.reduce((s, q) => s + mastery(q.id), 0) / qs.length : 0;
+}
+const domainMastery = d => groupMastery(q => q.d === d);
+function readiness() {
+  const total = Object.values(DOMAINS).reduce((s, d) => s + d.w, 0);
+  return Object.entries(DOMAINS).reduce((s, [k, d]) => s + domainMastery(k) * d.w / total, 0);
+}
+
+/* Leitner-style boxes: 1 = review soon, 2 = getting there, 3 = solid. */
+function updateBox(id, ok, conf) {
+  const b = state.boxes[id] || 1;
+  if (!ok || conf === "guess") state.boxes[id] = 1;
+  else if (conf === "sure") state.boxes[id] = Math.min(3, b + 1);
+  else state.boxes[id] = Math.max(2, b);
+}
+const rudiaQueue = () => QUESTIONS.filter(q => state.boxes[q.id] === 1);
+
+/* ============================================================
+   3. QUIZ RUNNER — shared by Practice and Review
+   ============================================================ */
+const run = { view: "home", filter: "all", topic: null, reason: null, mode: null, q: null, order: [], picked: null, conf: null, done: false, session: [], buddyOpen: false };
+
+function pickNext(mode) {
+  if (mode === "rudia") {
+    const qs = rudiaQueue().filter(q => q.id !== run.q?.id);
+    const pool = qs.length ? qs : rudiaQueue();
+    return pool.length ? pool[Math.floor(Math.random() * pool.length)] : null;
+  }
+  const pool = QUESTIONS.filter(q => (run.filter === "all" || q.d === run.filter) && (!run.topic || q.t === run.topic));
+  const unseen = pool.filter(q => !attempts(q.id).length && q.id !== run.q?.id);
+  if (unseen.length) return unseen[Math.floor(Math.random() * unseen.length)];
+  // Otherwise favour the weakest questions
+  const others = pool.filter(q => q.id !== run.q?.id).sort((x, y) => mastery(x.id) - mastery(y.id) || Math.random() - 0.5);
+  return others[Math.floor(Math.random() * Math.min(5, others.length))] || pool[0];
+}
+function shuffle(n) { const a = [...Array(n).keys()]; for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function startQuestion(mode) { run.q = pickNext(mode); run.order = run.q ? shuffle(run.q.o.length) : []; run.picked = null; run.conf = null; run.done = false; run.buddyOpen = false; }
+
+function lockIn(conf) {
+  const q = run.q; const ok = run.picked === q.a;
+  run.conf = conf; run.done = true;
+  state.log.push({ id: q.id, ok, conf, pick: run.picked, t: Date.now() });
+  updateBox(q.id, ok, conf); save();
+  run.session.push(ok ? (conf === "guess" ? "l" : "r") : "w");
+  render(); updateCount();
+}
+
+const L = orig => "ABCD"[run.order.indexOf(orig)]; /* letter as displayed for an original option index */
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+/* ---------- Small UI helpers ---------- */
+const I = (name, cls = "") => `<svg class="ico ${cls}" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-${name}"/></svg>`;
+const pct = v => Math.round(v * 100);
+const seenCount = () => new Set(state.log.map(x => x.id)).size;
+const lastAttempt = id => { const a = attempts(id); return a[a.length - 1]; };
+const reduceMotion = () => { try { return matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } };
+
+let ringId = 0;
+function ring(v, size, stroke, big, small, onDark) {
+  const r = (size - stroke) / 2, C = 2 * Math.PI * r, id = "rg" + (ringId++);
+  const c1 = onDark ? "#FFFFFF" : "var(--primary)", c2 = onDark ? "#BFE9FF" : "var(--cyan)";
+  return `<svg class="ring" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" role="img" aria-label="${small}: ${big}">
+    <defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:${c1}"/><stop offset="1" style="stop-color:${c2}"/></linearGradient></defs>
+    <circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" style="stroke:${onDark ? "rgba(255,255,255,0.2)" : "var(--surface-2)"}" stroke-width="${stroke}"/>
+    <circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="url(#${id})" stroke-width="${stroke}" stroke-linecap="round" stroke-dasharray="${Math.max(0.001, C * v)} ${C}" transform="rotate(-90 ${size / 2} ${size / 2})"/>
+    <text x="50%" y="${size / 2 + size * 0.02}" text-anchor="middle" dominant-baseline="middle" font-size="${size * 0.25}" font-weight="800" style="fill:${onDark ? "#FFFFFF" : "var(--fg)"}">${big}</text>
+    <text x="50%" y="${size / 2 + size * 0.2}" text-anchor="middle" font-size="${Math.max(9, size * 0.075)}" font-weight="700" letter-spacing="1" style="fill:${onDark ? "rgba(255,255,255,0.75)" : "var(--faint)"}">${small.toUpperCase()}</text>
+  </svg>`;
+}
+
+function domainStatus(k) {
+  const tried = QUESTIONS.filter(q => q.d === k && attempts(q.id).length).length;
+  if (!tried) return ["new", "Not started"];
+  const m = domainMastery(k);
+  if (m >= 0.7) return ["ok", "Strong"];
+  if (m >= 0.4) return ["mid", "Building"];
+  return ["no", "Needs work"];
+}
+function topicStats() {
+  return Object.entries(DOMAINS).flatMap(([k, d]) => d.topics.map(t => {
+    const qs = QUESTIONS.filter(q => q.d === k && q.t === t);
+    return { d: k, t, m: groupMastery(q => q.d === k && q.t === t), n: qs.length, seen: qs.filter(q => attempts(q.id).length).length };
+  }));
+}
+function nextChallenge() {
+  if (!state.log.length) return { d: "d1", t: "Cloud computing", m: 0, n: QUESTIONS.filter(q => q.t === "Cloud computing").length, seen: 0, fresh: true };
+  return topicStats().sort((a, b) => a.m - b.m || DOMAINS[b.d].w - DOMAINS[a.d].w)[0];
+}
+function reasonFor(q) {
+  const la = lastAttempt(q.id);
+  if (!la) return null;
+  if (!la.ok && la.conf === "sure") return ["r-bad", "alert", "Wrong but sure", "You were confident last time and got it wrong. That's a misconception worth fixing."];
+  if (!la.ok) return ["r-bad", "x", "Missed last time", "You chose a different answer last time. Let's lock in the right idea."];
+  if (la.conf === "guess") return ["r-warn", "dice", "Lucky guess", "You got this right last time, but you were guessing. Now prove you know it."];
+  return null;
+}
+
+function domainCard(k) {
+  const d = DOMAINS[k], m = domainMastery(k), [cls, label] = domainStatus(k);
+  const qs = QUESTIONS.filter(q => q.d === k);
+  const tried = qs.filter(q => attempts(q.id).length).length;
+  return `<article class="card domain-card" style="--dc:var(--${k})">
+    <div class="row"><h3>${esc(d.name)}</h3><span class="pill ${cls}">${label}</span></div>
+    <div class="row"><span class="pct num">${pct(m)}%</span><span class="eyebrow">${d.weight} of exam</span></div>
+    <div class="bar" title="Mastery ${pct(m)}%. Marker shows the 70% target"><b style="width:${pct(m)}%;--fill:var(--${k})"></b><span class="goal" style="left:70%"></span></div>
+    <div class="meta"><span>${tried} of ${qs.length} questions tried</span><button class="btn-link" data-action="practice-domain" data-domain="${k}">Practise ${I("arrow", "sm")}</button></div>
+  </article>`;
+}
+
+const cloudArt = (cls = "") => `<svg class="${cls}" viewBox="0 0 360 240" aria-hidden="true">
+  <g fill="#FFFFFF">
+    <path d="M92 196a52 52 0 0 1-8-103 70 70 0 0 1 134-18 58 58 0 1 1 22 121z"/>
+    <circle cx="300" cy="60" r="6"/><circle cx="330" cy="110" r="4"/><circle cx="40" cy="60" r="5"/>
+  </g>
+  <g fill="none" stroke="#FFFFFF" stroke-width="2" stroke-dasharray="3 6"><path d="M300 60 330 110M240 50l60 10"/></g>
+</svg>`;
+
+const emptyArt = `<svg class="art" viewBox="0 0 120 90" aria-hidden="true">
+  <path d="M30 74a20 20 0 0 1-3-39.7 27 27 0 0 1 51.6-7A22.5 22.5 0 1 1 87 74z" fill="url(#gCloud)" opacity=".9"/>
+  <path d="m45 52 9 9 18-19" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`;
+
+/* ---------- Quiz card (shared by Practice and Review) ---------- */
+function verdictData(q) {
+  const ok = run.picked === q.a;
+  if (ok && run.conf === "guess") return ["v-warn", "dice", "Lucky guess", "Right answer, but you weren't sure. It's going into your review queue so you can prove it next time."];
+  if (ok && run.conf === "think") return ["v-ok", "check", "Correct", `You said "think so", so Wingu will check it once more before calling it solid.`];
+  if (ok) return ["v-ok", "check", "Correct and confident", "That's the kind of answer that passes exams."];
+  if (run.conf === "sure") return ["v-bad", "alert", "Not quite, and you were sure", "That's a misconception worth fixing now. It's been added to your review queue."];
+  return ["v-bad", "x", "Not quite", `The right answer is ${L(q.a)}. It's been added to your review queue.`];
+}
+const verdictHTML = q => { const [cls, ico, title, msg] = verdictData(q); return `<div class="verdict ${cls}" role="status"><span class="vi">${I(ico)}</span><div><b>${title}</b><p>${esc(msg)}</p></div></div>`; };
+
+function questionCard(mode) {
+  const q = run.q;
+  if (!q) return "";
+  const D = DOMAINS[q.d];
+  const n = run.session.length + (run.done ? 0 : 1);
+  const opts = run.order.map((i, pos) => {
+    let cls = "opt", mark = "";
+    if (run.done) {
+      if (i === q.a) { cls += " right"; mark = I("check"); }
+      else if (i === run.picked) { cls += " wrong"; mark = I("x"); }
+      else cls += " dim";
+    } else if (i === run.picked) cls += " picked";
+    return `<button class="${cls}" data-opt="${i}" id="opt-${pos}" ${run.done ? "disabled" : ""} aria-pressed="${i === run.picked}"><span class="key">${"ABCD"[pos]}</span><span>${esc(q.o[i])}</span><span class="mark">${mark}</span></button>`;
+  }).join("");
+
+  let reason = "";
+  if (mode === "rudia" && run.reason) {
+    const [rc, ri, rt, rm] = run.reason;
+    reason = `<div class="reason ${rc}"><span class="ri">${I(ri, "lg")}</span><div><b>Why it's back: ${rt}</b><p>${rm}</p></div></div>`;
+  }
+
+  let lower = "";
+  if (!run.done && run.picked !== null) {
+    const icons = { sure: "target", think: "think", guess: "dice" }, keys = { sure: "S", think: "T", guess: "G" };
+    lower = `<div class="conf" id="conf-panel">
+      <div><p class="conf-title">How sure are you about ${L(run.picked)}?</p><p class="conf-sub">Be honest. This is how Wingu spots lucky guesses.</p></div>
+      <div class="conf-row">${Object.entries(CONF).map(([k, c]) => `<button class="conf-btn c-${k}" data-conf="${k}" id="conf-${k}"><span class="ci">${I(icons[k])}</span><span><b>${c.label}</b><small>${c.hint}</small></span><kbd>${keys[k]}</kbd></button>`).join("")}</div>
+    </div>`;
+  } else if (!run.done) {
+    lower = `<p class="conf-sub">Choose an answer to continue. ${mode === "rudia" ? "" : "No timer, no pressure."}</p>`;
+  }
+  if (run.done) {
+    lower = `<div class="feedback" id="feedback">
+      ${verdictHTML(q)}
+      <div class="why"><h3>Why ${L(q.a)} is right</h3><p>${esc(q.why)}</p></div>
+      <div class="tip"><span class="ti">${I("bulb")}</span><div><p class="tl">Real-life example</p><p>${esc(q.an)}</p></div></div>
+      <div class="fb-actions">
+        <button class="btn btn-ghost" id="buddy-toggle" aria-expanded="${run.buddyOpen}">${I("chat")}${run.buddyOpen ? "Hide study buddy" : "Still confused? Ask a study buddy"}</button>
+        <button class="btn btn-primary btn-lg" id="next">${mode === "rudia" ? "Next review" : "Next question"} ${I("arrow")}</button>
+      </div>
+      ${run.buddyOpen ? buddyHTML(q) : ""}
+    </div>`;
+  }
+  return `<section class="card quiz fresh" aria-label="Question">
+    <div class="quiz-top">
+      <div class="labels"><span class="pill d-${q.d}">${esc(D.name)}</span><span class="pill plain">${esc(q.t)}</span></div>
+      <span class="qnum">${mode === "rudia" ? "Review" : "Question"} ${n} · this session</span>
+    </div>
+    ${reason}
+    <h2 class="qtext">${esc(q.q)}</h2>
+    <div class="opts" role="group" aria-label="Answer choices">${opts}</div>
+    ${lower}
+  </section>`;
+}
+
+/* ============================================================
+   4. STUDY BUDDY — builds a tuned prompt for any AI assistant
+   ============================================================ */
+const LANGS = ["English", "Swahili", "Sheng (Nairobi street Swahili)", "Yoruba", "Hausa", "Igbo", "isiZulu", "Amharic", "Luganda", "Kinyarwanda", "French"];
+const PLACES = ["Kenya", "Nigeria", "Ghana", "South Africa", "Uganda", "Tanzania", "Rwanda", "Ethiopia", "Zambia", "Egypt"];
+const buddyPrefs = (() => { try { return JSON.parse(localStorage.getItem("wingu-buddy")) || {}; } catch (e) { return {}; } })();
+let buddyLang = (buddyPrefs.lang === "Kiswahili" ? "Swahili" : buddyPrefs.lang) || "English", buddyPlace = buddyPrefs.place || "Kenya";
+
+function buddyPrompt(q) {
+  const ok = run.picked === q.a;
+  const outcome = ok
+    ? (run.conf === "sure" ? "I got it right and I was confident." : `I got it right but my confidence was "${CONF[run.conf].label}", so I may have guessed.`)
+    : `I chose ${L(run.picked)} ("${q.o[run.picked]}") with confidence "${CONF[run.conf].label}", and that was wrong.`;
+  return `You are Wingu, a patient study buddy helping a beginner prepare for the Microsoft AZ-900 (Azure Fundamentals) exam.
+
+ABOUT ME
+- I live in ${buddyPlace} and I'm new to cloud computing.
+- Please explain in ${buddyLang}. Keep official Azure service names and exam terms in English, because the exam is in English.
+
+THE PRACTICE QUESTION (unofficial, written for practice, not from the real exam)
+Topic: ${DOMAINS[q.d].name} > ${q.t}
+Question: ${q.q}
+${run.order.map(i => `${L(i)}) ${q.o[i]}`).join("\n")}
+Correct answer: ${L(q.a)}) ${q.o[q.a]}
+What happened: ${outcome}
+
+WHAT I NEED
+1. In 2–3 short sentences, explain the concept behind the correct answer in plain language.
+2. ${ok ? "Show me the one clue in the question that points to the right answer, so I can be sure next time." : `Explain the exact misunderstanding that would lead someone to pick ${L(run.picked)}, and how to tell the two ideas apart.`}
+3. Give one everyday example from life in ${buddyPlace} that makes it stick (transport, markets, mobile money, school, farming, family). Do not use stereotypes.
+4. End with ONE new multiple-choice check question on the same skill, with 4 options. Do not reveal the answer until I reply.
+
+RULES
+- Stay within the public AZ-900 skills outline on Microsoft Learn. Do not quote or recreate real exam questions.
+- If you are not certain a fact is current, say so and tell me which Microsoft Learn topic to check.
+- Keep everything before the check question under 170 words.`;
+}
+
+function buddyHTML(q) {
+  return `<div class="buddy">
+    <div class="buddy-head"><span class="icon-tile">${I("chat")}</span><div><h3>Your study buddy prompt</h3><p>It already knows this question, your answer and how sure you were. Copy it into Claude or any AI assistant.</p></div></div>
+    <div class="buddy-row">
+      <label class="field" for="buddy-lang">Explain in<select id="buddy-lang">${LANGS.map(l => `<option ${l === buddyLang ? "selected" : ""}>${l}</option>`).join("")}</select></label>
+      <label class="field" for="buddy-place">Examples from<select id="buddy-place">${PLACES.map(l => `<option ${l === buddyPlace ? "selected" : ""}>${l}</option>`).join("")}</select></label>
+    </div>
+    <textarea class="prompt" id="buddy-text" readonly aria-label="Study buddy prompt">${esc(buddyPrompt(q))}</textarea>
+    <div class="buddy-actions"><button class="btn btn-primary" id="copy-prompt">${I("copy")}Copy prompt</button><a class="btn btn-ghost" href="https://claude.ai/new" target="_blank" rel="noopener">Open Claude ${I("arrow", "sm")}</a></div>
+  </div>`;
+}
+
+/* ---------- Study planner ---------- */
+const planPrefs = (() => { try { return JSON.parse(localStorage.getItem("wingu-plan")) || {}; } catch (e) { return {}; } })();
+function isoDate(d) { const z = new Date(d.getTime() - d.getTimezoneOffset() * 60000); return z.toISOString().slice(0, 10); }
+let examDate = planPrefs.date || isoDate(new Date(Date.now() + 21 * 864e5));
+let hoursPerWeek = planPrefs.hours || 6;
+
+function buildPlan() {
+  const today = new Date(isoDate(new Date()) + "T00:00");
+  const exam = new Date(examDate + "T00:00");
+  const days = Math.round((exam - today) / 864e5);
+  if (isNaN(days)) return { error: "Pick your exam date to build a plan." };
+  if (days < 1) return { error: "That date is today or in the past. Pick a future exam date." };
+  const weeks = Math.max(1, Math.ceil(days / 7));
+  const totalHours = Math.max(1, Math.round(hoursPerWeek * Math.min(days, weeks * 7) / 7));
+
+  // Hours per domain: exam weight × how much is still unknown (with a floor so strong domains still get revision)
+  const need = Object.fromEntries(Object.entries(DOMAINS).map(([k, d]) => [k, d.w * (1.25 - domainMastery(k))]));
+  const sumNeed = Object.values(need).reduce((a, b) => a + b, 0);
+  const studyHours = weeks > 1 ? Math.round(totalHours * 0.8) : totalHours;
+  const blocks = [];
+  // Weakest domain first, topics ordered weakest first within each domain
+  const order = Object.keys(DOMAINS).sort((a, b) => domainMastery(a) - domainMastery(b));
+  order.forEach(k => {
+    const h = Math.max(1, Math.round(studyHours * need[k] / sumNeed));
+    const topics = DOMAINS[k].topics.slice().sort((a, b) => groupMastery(q => q.d === k && q.t === a) - groupMastery(q => q.d === k && q.t === b));
+    for (let i = 0; i < h; i++) blocks.push({ d: k, t: topics[i % topics.length] });
+  });
+
+  const out = [];
+  const studyWeeks = weeks > 1 ? weeks - 1 : 1;
+  const per = Math.ceil(blocks.length / studyWeeks);
+  for (let w = 0; w < studyWeeks; w++) {
+    const chunk = blocks.slice(w * per, (w + 1) * per);
+    if (!chunk.length) continue;
+    const grouped = {};
+    chunk.forEach(b => { const key = b.d + "|" + b.t; grouped[key] = (grouped[key] || 0) + 1; });
+    out.push({ n: w + 1, items: Object.entries(grouped).map(([key, h]) => { const [d, t] = key.split("|"); return { d, t, h }; }), extra: "For each topic: read the matching Microsoft Learn module, then practise it here. Start every session with 10 minutes of review." });
+  }
+  if (weeks > 1) out.push({ n: weeks, final: true, items: [], extra: "" });
+  return { days, weeks, totalHours, out };
+}
+
+/* ============================================================
+   5. VIEWS
+   ============================================================ */
+function verdictFor(r, ds) {
+  const minD = Math.min(...ds);
+  if (!state.log.length) return ["new", "Not started", "Answer a few practice questions and your readiness estimate appears here."];
+  if (r >= 0.8 && minD >= 0.7) return ["ok", "Ready to book", "Strong across all three domains with confident answers. Do one last mixed run and keep your review queue empty."];
+  if (r >= 0.6) return ["mid", "Getting close", "Good progress. Close the gap in your weakest domain before you book."];
+  return ["no", "Not yet", "Keep building. Focus on your weakest domain and clear your review queue daily."];
+}
+function greeting() { const h = new Date().getHours(); return h < 12 ? "Good morning" : h < 17 ? "Good afternoon" : "Good evening"; }
+
+function viewHome() {
+  const r = readiness(), seen = seenCount(), has = state.log.length > 0, rq = rudiaQueue().length;
+  const ds = Object.keys(DOMAINS).map(domainMastery);
+  const [, vLabel] = verdictFor(r, ds);
+  const nc = nextChallenge(), plan = buildPlan();
+  const lucky = state.log.filter(x => x.ok && x.conf === "guess").length;
+  const sure = state.log.filter(x => x.conf === "sure");
+  const calib = sure.length ? pct(sure.filter(x => x.ok).length / sure.length) + "%" : "–";
+
+  const hero = `<section class="hero fresh">
+    <div class="hero-copy">
+      <p class="greet">${greeting()}. ${has ? "Welcome back." : "Welcome to Wingu."}</p>
+      <h1>Understand Azure. <em>Not just the answers.</em></h1>
+      <p class="sub">${has
+        ? `You've tried ${seen} of ${QUESTIONS.length} questions. Wingu counts what you actually know, not what you guessed.`
+        : "Practise original AZ-900 questions, say how sure you are, and Wingu will tell real knowledge apart from lucky guesses."}</p>
+      <div class="hero-actions">
+        <button class="btn btn-white btn-lg" data-goto="practice">${has ? "Continue learning" : "Start practice"} ${I("arrow")}</button>
+        ${rq ? `<button class="btn btn-glass btn-lg" data-goto="rudia">${I("rudia")}Review ${rq} question${rq > 1 ? "s" : ""}</button>` : has ? "" : `<button class="btn btn-glass btn-lg" data-action="sample">${I("spark")}See a demo learner</button>`}
+      </div>
+    </div>
+    <div class="hero-stat">
+      ${ring(r, 104, 10, pct(r) + "%", "Ready", true)}
+      <div style="display:grid;gap:4px"><p class="lbl">Estimated readiness</p><p class="msg">${has ? vLabel : "Starts after your first answer"}</p><p class="note">An estimate from your practice, not a guarantee.</p></div>
+    </div>
+    ${cloudArt("hero-cloud float")}
+  </section>`;
+
+  const domains = `<section style="display:grid;gap:14px">
+    <div class="card-head" style="margin:0"><h2 class="section-title">Exam domains</h2><button class="btn-link" data-goto="ready">Full readiness report ${I("arrow", "sm")}</button></div>
+    <div class="grid-3">${Object.keys(DOMAINS).map(domainCard).join("")}</div>
+  </section>`;
+
+  const challenge = `<article class="card challenge">
+    <div style="display:flex;gap:12px;align-items:center"><span class="icon-tile">${I("flag")}</span><div><p class="eyebrow">Your next challenge</p><span class="pill d-${nc.d}" style="margin-top:4px">${esc(DOMAINS[nc.d].name)}</span></div></div>
+    <p class="topic">${esc(nc.t)}</p>
+    <p>${nc.fresh
+      ? "Start where the exam starts: what cloud computing is, who is responsible for what, and how you pay for it. A few questions take about five minutes."
+      : `Your weakest topic right now, at ${pct(nc.m)}% mastery with ${nc.seen} of ${nc.n} questions tried. A short focused round will move it fastest.`}</p>
+    <div><button class="btn btn-primary" data-action="practice-topic" data-domain="${nc.d}" data-topic="${esc(nc.t)}">Practise ${esc(nc.t)} ${I("arrow")}</button></div>
+  </article>`;
+
+  const progress = `<article class="card" style="display:grid;gap:16px;align-content:start">
+    <div class="card-head" style="margin:0"><h2>Your progress</h2><span class="eyebrow">All time</span></div>
+    ${has ? `<div class="mini-stats">
+        <div class="mini-stat"><span class="v">${seen}<span style="font-size:.9rem;color:var(--faint)">/${QUESTIONS.length}</span></span><span class="l">Questions tried</span></div>
+        <div class="mini-stat"><span class="v" style="color:var(--warn)">${lucky}</span><span class="l">Lucky guesses caught</span></div>
+        <div class="mini-stat"><span class="v">${calib}</span><span class="l">Right when you said "Sure"</span></div>
+      </div>
+      <div style="display:grid;gap:8px"><div class="bar"><b style="width:${pct(seen / QUESTIONS.length)}%"></b></div><p class="eyebrow">${pct(seen / QUESTIONS.length)}% of the question bank covered</p></div>`
+    : `<div class="empty" style="padding:8px 0">${emptyArt}<p>No answers yet. After your first question you'll see what you've covered, how many lucky guesses Wingu caught, and how often "Sure" really meant sure.</p><button class="btn btn-ghost btn-small" data-action="sample">${I("spark", "sm")}Load a demo learner</button></div>`}
+  </article>`;
+
+  const features = [
+    ["practice", "practice", "", "Practice", "Original questions by exam domain, with instant explanations and real-life examples.", `${QUESTIONS.length} questions`, "Start"],
+    ["rudia", "rudia", "warn", "Review", "Wrong answers and lucky guesses come back until you truly know them.", rq ? `${rq} waiting` : "All clear", "Review"],
+    ["ready", "gauge", "cyan", "Readiness", "A weighted estimate of how ready you are, domain by domain.", has ? `${pct(r)}% estimated` : "Not started", "View"],
+    ["plan", "calendar", "indigo", "Study plan", "A week-by-week plan built from your exam date and weak topics.", plan.days ? `Exam in ${plan.days} days` : "Set your date", "Plan"]
+  ].map(([v, ic, tone, h, p, meta, cta]) => `<button class="feature" data-goto="${v}">
+      <span class="icon-tile ${tone}">${I(ic)}</span><h3>${h}</h3><p>${p}</p>
+      <span class="foot"><span>${meta}</span><span>${cta} ${I("arrow", "sm")}</span></span>
+    </button>`).join("");
+
+  return `<div style="display:grid;gap:28px">${hero}${domains}
+    <div class="grid-2">${challenge}${progress}</div>
+    <section style="display:grid;gap:14px"><h2 class="section-title">Your study tools</h2><div class="grid-4">${features}</div></section></div>`;
+}
+
+function sidePanel(mode) {
+  const s = run.session.slice(-40);
+  const c = k => run.session.filter(x => x === k).length;
+  const seen = seenCount();
+  const sessionCard = `<div class="card"><h3>This session</h3>
+    ${s.length ? `<div class="dots" aria-hidden="true">${s.map(x => `<i class="${x}"></i>`).join("")}</div>
+      <div class="legend"><span><i style="background:var(--good)"></i>${c("r")} confident</span><span><i style="background:var(--warn)"></i>${c("l")} lucky</span><span><i style="background:var(--bad)"></i>${c("w")} wrong</span></div>`
+    : `<p class="conf-sub">Each answer you give adds a coloured square here: green for confident, amber for lucky, red for wrong.</p>`}</div>`;
+  const coverage = mode === "rudia"
+    ? `<div class="card"><h3>How Review works</h3><div class="steps">
+        <div class="step"><span class="n"></span><p>Missed or guessed questions land in Box 1.</p></div>
+        <div class="step"><span class="n"></span><p>Right and "Sure" moves a question up a box.</p></div>
+        <div class="step"><span class="n"></span><p>Reach Box 3 and it's solid. A wrong answer or a guess sends it back.</p></div></div></div>`
+    : `<div class="card"><h3>Question bank</h3><div class="bar"><b style="width:${pct(seen / QUESTIONS.length)}%"></b></div>
+        <p class="conf-sub"><b class="num" style="color:var(--fg)">${seen}</b> of ${QUESTIONS.length} questions tried. Unseen questions come first, then your weakest.</p></div>`;
+  const keys = `<div class="card keys-card"><h3>Keyboard shortcuts</h3><div class="keys">
+      <div><span>Choose an answer</span><span><kbd>1</kbd> – <kbd>4</kbd></span></div>
+      <div><span>Confidence</span><span><kbd>S</kbd> <kbd>T</kbd> <kbd>G</kbd></span></div>
+      <div><span>Next question</span><kbd>N</kbd></div></div></div>`;
+  return `<aside class="side-panel">${sessionCard}${coverage}${keys}</aside>`;
+}
+
+function viewPractice() {
+  if (!run.q || run.mode !== "practice") { run.mode = "practice"; startQuestion("practice"); }
+  const chips = [["all", "All topics", ""], ...Object.entries(DOMAINS).map(([k, d]) => [k, d.name, d.weight])]
+    .map(([k, l, w]) => `<button class="chip" data-filter="${k}" aria-pressed="${run.filter === k && !run.topic}">${esc(l)}${w ? `<span class="w">${w}</span>` : ""}</button>`).join("");
+  const topicChip = run.topic ? `<button class="chip topic" data-action="clear-topic" aria-label="Clear topic filter ${esc(run.topic)}">Topic: ${esc(run.topic)} ${I("x", "sm")}</button>` : "";
+  return `<div style="display:grid;gap:20px">
+    <div class="page-head"><div><h1>Practice</h1><p>Pick an answer, then say how sure you are. A right answer you guessed isn't the same as one you know, and Wingu treats them differently.</p></div></div>
+    <div class="filters" role="group" aria-label="Filter by exam domain">${chips}${topicChip}</div>
+    <div class="quiz-layout">${questionCard("practice")}${sidePanel("practice")}</div>
+  </div>`;
+}
+
+function viewRudia() {
+  const counts = [1, 2, 3].map(b => QUESTIONS.filter(q => state.boxes[q.id] === b).length);
+  const total = counts[0] + counts[1] + counts[2];
+  const head = `<div class="page-head"><div><h1>Review</h1><p>Questions you missed or only guessed come back here until you answer them right <i>and</i> sure.</p></div></div>
+    <div class="boxes">
+      <div class="card box"><span class="icon-tile warn">${I("rudia")}</span><div><span class="v">${counts[0]}</span><p class="l">Box 1 · review now</p></div></div>
+      <div class="card box"><span class="icon-tile">${I("think")}</span><div><span class="v">${counts[1]}</span><p class="l">Box 2 · getting there</p></div></div>
+      <div class="card box"><span class="icon-tile good">${I("check")}</span><div><span class="v">${counts[2]}</span><p class="l">Box 3 · solid</p></div></div>
+    </div>
+    ${total ? `<div style="display:grid;gap:8px"><div class="stack-bar" aria-hidden="true"><i style="width:${100 * counts[2] / total}%;background:var(--good)"></i><i style="width:${100 * counts[1] / total}%;background:var(--primary)"></i><i style="width:${100 * counts[0] / total}%;background:var(--warn)"></i></div>
+      <p class="eyebrow">${counts[2]} of ${total} questions you've tried are solid</p></div>` : ""}`;
+
+  if (run.mode !== "rudia" || (!run.q && rudiaQueue().length)) { run.mode = "rudia"; startQuestion("rudia"); }
+  if (!run.q || (!run.done && !rudiaQueue().length)) {
+    const msg = state.log.length
+      ? ["Box 1 is clear", "Every question you missed or guessed has been fixed. You closed those gaps before they could grow. Keep going in Practice to cover more ground."]
+      : ["Nothing to review yet", "Answer a few questions in Practice. Anything you miss, or get right by guessing, will show up here."];
+    return `<div style="display:grid;gap:20px">${head}<section class="card empty">${emptyArt}<h2>${msg[0]}</h2><p>${msg[1]}</p><button class="btn btn-primary" data-goto="practice">Go to Practice ${I("arrow")}</button></section></div>`;
+  }
+  if (!run.done) run.reason = reasonFor(run.q);
+  return `<div style="display:grid;gap:20px">${head}<div class="quiz-layout">${questionCard("rudia")}${sidePanel("rudia")}</div></div>`;
+}
+
+function nextSteps(ds) {
+  const steps = [];
+  const rq = rudiaQueue().length, seen = seenCount();
+  const weakest = Object.keys(DOMAINS).sort((a, b) => domainMastery(a) - domainMastery(b))[0];
+  const sure = state.log.filter(x => x.conf === "sure");
+  const sureAcc = sure.length ? sure.filter(x => x.ok).length / sure.length : 1;
+  if (rq) steps.push(`Clear the <b>${rq}</b> question${rq > 1 ? "s" : ""} waiting in your review queue.`);
+  steps.push(`Practise <b>${esc(DOMAINS[weakest].name)}</b>, your weakest domain at ${pct(domainMastery(weakest))}%.`);
+  if (seen < QUESTIONS.length) steps.push(`Try the <b>${QUESTIONS.length - seen}</b> questions you haven't seen yet.`);
+  if (sure.length >= 5 && sureAcc < 0.8) steps.push(`Slow down before tapping "Sure". You were right only ${pct(sureAcc)}% of the time you said it.`);
+  steps.push("Turn this into a schedule with the Study plan.");
+  return steps.slice(0, 4);
+}
+
+function viewReady() {
+  const r = readiness(), has = state.log.length > 0;
+  const ds = Object.keys(DOMAINS).map(domainMastery);
+  const [cls, label, advice] = verdictFor(r, ds);
+  const seen = seenCount();
+  const lucky = state.log.filter(x => x.ok && x.conf === "guess").length;
+  const sure = state.log.filter(x => x.conf === "sure");
+  const calib = sure.length ? pct(sure.filter(x => x.ok).length / sure.length) + "%" : "–";
+  const weak = topicStats().sort((a, b) => a.m - b.m).slice(0, 4);
+
+  return `<div style="display:grid;gap:20px">
+    <div class="page-head"><div><h1>Readiness</h1><p>Each domain is weighted by its share of the exam, and only answers you were sure about count at full value. Lucky guesses don't make you ready.</p></div></div>
+    <section class="card ready-hero fresh">
+      ${ring(r, 168, 14, pct(r) + "%", "Estimated", false)}
+      <div style="display:grid;gap:12px">
+        <span class="pill ${cls}" style="justify-self:start">${label}</span>
+        <h2>${has ? advice : "Your readiness estimate starts after your first answer."}</h2>
+        <p>Wingu's target is 80% overall with at least 70% in every domain.</p>
+        <div class="estimate">${I("alert", "sm")}<span>This is an estimate based on your practice in Wingu, not a prediction of your exam result. The real exam is scored by Microsoft on a 1–1,000 scale, with 700 needed to pass.</span></div>
+      </div>
+    </section>
+    <div class="grid-3">${Object.keys(DOMAINS).map(domainCard).join("")}</div>
+    <section class="card"><div class="mini-stats">
+      <div class="mini-stat"><span class="v">${seen}<span style="font-size:.9rem;color:var(--faint)">/${QUESTIONS.length}</span></span><span class="l">Questions tried</span></div>
+      <div class="mini-stat"><span class="v" style="color:var(--warn)">${lucky}</span><span class="l">Lucky guesses caught</span></div>
+      <div class="mini-stat"><span class="v">${calib}</span><span class="l">Right when you said "Sure"</span></div>
+    </div></section>
+    <div class="grid-2">
+      <section class="card"><div class="card-head"><h2>Weakest topics</h2><span class="eyebrow">Mastery</span></div>
+        <div class="list">${weak.map(x => `<div class="list-row"><div><p class="t">${esc(x.t)}</p><p class="s"><span class="pill d-${x.d}">${esc(DOMAINS[x.d].name)}</span>${pct(x.m)}% · ${x.seen}/${x.n} tried</p></div>
+          <button class="btn btn-ghost btn-small" data-action="practice-topic" data-domain="${x.d}" data-topic="${esc(x.t)}">Practise</button></div>`).join("")}</div></section>
+      <section class="card"><div class="card-head"><h2>Recommended next steps</h2></div>
+        <div class="steps">${nextSteps(ds).map(s => `<div class="step"><span class="n"></span><p>${s}</p></div>`).join("")}</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px"><button class="btn btn-primary" data-goto="plan">Build my study plan ${I("arrow")}</button>
+        <button class="btn btn-ghost" data-action="sample">${I("spark", "sm")}${has ? "Replace with demo data" : "Load a demo learner"}</button></div></section>
+    </div>
+  </div>`;
+}
+
+function viewPlan() {
+  const p = buildPlan();
+  const form = `<div class="page-head"><div><h1>Study plan</h1><p>Tell Wingu when your exam is and how many hours you can give each week. Heavier exam domains and your weakest topics get more time.</p></div></div>
+    <section class="card"><div class="plan-form">
+      <label class="field" for="exam-date">Exam date<input type="date" id="exam-date" value="${examDate}"></label>
+      <label class="field" for="hours">Hours per week<input type="number" id="hours" min="1" max="40" value="${hoursPerWeek}"></label>
+      <div class="plan-sum">${p.error ? "" : `<span class="pill plain">${I("calendar", "sm")}${p.days} days</span><span class="pill plain">${I("clock", "sm")}~${p.totalHours} hours</span><span class="pill plain">${I("layers", "sm")}${p.weeks} week${p.weeks > 1 ? "s" : ""}</span>`}</div>
+    </div>
+    ${state.log.length ? "" : `<p class="conf-sub" style="margin-top:14px">No practice data yet, so time is split by exam weight. Answer some questions and the plan will focus on your weak topics.</p>`}
+    </section>`;
+  if (p.error) return `<div style="display:grid;gap:20px">${form}<section class="card empty">${emptyArt}<p>${p.error}</p></section></div>`;
+
+  const first = p.out[0] && p.out[0].items[0];
+  const startHere = first ? `<section class="card start-here fresh"><span class="icon-tile">${I("flag", "lg")}</span>
+      <div><p class="eyebrow">Start here · today</p><h2>${esc(first.t)}</h2><p>Read the matching Microsoft Learn module, then do a short Wingu round on this topic.</p></div>
+      <button class="btn btn-white" data-action="practice-topic" data-domain="${first.d}" data-topic="${esc(first.t)}">Practise now ${I("arrow")}</button></section>` : "";
+  const sprint = p.days <= 3 ? `<div class="verdict v-warn"><span class="vi">${I("alert")}</span><div><b>Exam in ${p.days} day${p.days > 1 ? "s" : ""}</b><p>Skip new material. Practise your weakest topics and clear your review queue.</p></div></div>` : "";
+
+  const weeks = p.out.map(w => w.final
+    ? `<div class="wk final"><div class="rail"><span class="node">${I("check")}</span><span class="line"></span></div><div class="body">
+        <h3>Week ${w.n}: exam week <span>Mixed practice and rest</span></h3>
+        ${["Two full mixed Practice rounds across all domains", "Clear every question in Review Box 1", "Check Readiness: 80%+ overall and 70%+ in each domain", "Light review the day before. Check your booking and ID, then sleep well."]
+          .map(t => `<div class="task" style="grid-template-columns:auto minmax(0,1fr)"><span class="ck">${I("check")}</span><p class="tt" style="font-weight:600">${t}</p></div>`).join("")}
+      </div></div>`
+    : `<div class="wk"><div class="rail"><span class="node">${w.n}</span><span class="line"></span></div><div class="body">
+        <h3>Week ${w.n} <span>${w.items.reduce((s, i) => s + i.h, 0)} hours</span></h3>
+        ${w.items.map(i => `<button class="task" data-action="practice-topic" data-domain="${i.d}" data-topic="${esc(i.t)}" style="text-align:left">
+            <span class="icon-tile" style="width:36px;height:36px;border-radius:10px">${I("book", "sm")}</span>
+            <span><span class="tt" style="display:block">${esc(i.t)}</span><span class="ts"><span class="pill d-${i.d}">${esc(DOMAINS[i.d].name)}</span></span></span>
+            <span class="hrs">${i.h} h</span></button>`).join("")}
+        <p class="wk-note">For each topic, read the matching Microsoft Learn module, then practise it here. Start every session with 10 minutes of review.</p>
+      </div></div>`).join("");
+
+  return `<div style="display:grid;gap:20px">${form}${sprint}${startHere}
+    <section class="card"><div class="card-head"><h2>Your weeks</h2><span class="eyebrow">Tap a topic to practise it</span></div><div class="timeline">${weeks}</div></section></div>`;
+}
+
+/* ============================================================
+   6. RENDER + EVENTS
+   ============================================================ */
+const VIEWS = { home: viewHome, practice: viewPractice, rudia: viewRudia, ready: viewReady, plan: viewPlan };
+function render() {
+  ringId = 0;
+  document.getElementById("view").innerHTML = VIEWS[run.view]();
+  document.querySelectorAll(".nav button[data-view], .bottomnav button[data-view]").forEach(b => {
+    if (b.dataset.view === run.view) b.setAttribute("aria-current", "page"); else b.removeAttribute("aria-current");
+  });
+}
+function updateCount() {
+  const n = rudiaQueue().length;
+  document.querySelectorAll(".rudia-count").forEach(el => { el.textContent = n; el.classList.toggle("zero", !n); });
+  document.querySelectorAll(".rudia-dot").forEach(el => { el.textContent = n; el.hidden = !n; });
+}
+function go(view) {
+  run.view = view;
+  if (view === "practice" && run.mode !== "practice") { run.q = null; }
+  if (view === "rudia" && run.mode !== "rudia") { run.q = null; }
+  render(); window.scrollTo({ top: 0 });
+  try { history.replaceState(null, "", "#" + view); } catch (e) {}
+}
+function toast(msg) { document.querySelectorAll(".toast").forEach(x => x.remove()); const t = document.createElement("div"); t.className = "toast"; t.setAttribute("role", "status"); t.innerHTML = I("check", "sm") + esc(msg); document.body.appendChild(t); setTimeout(() => t.remove(), 2200); }
+
+function revealFeedback() {
+  const el = document.getElementById("feedback");
+  if (!el) return;
+  const r = el.getBoundingClientRect();
+  if (r.top > window.innerHeight - 120) el.scrollIntoView({ block: "start", behavior: reduceMotion() ? "auto" : "smooth" });
+}
+function lock(conf) { lockIn(conf); revealFeedback(); }
+function nextQ() {
+  startQuestion(run.mode); render();
+  const quiz = document.querySelector(".quiz");
+  if (quiz && quiz.getBoundingClientRect().top < 0) quiz.scrollIntoView({ block: "start", behavior: reduceMotion() ? "auto" : "smooth" });
+  document.getElementById("opt-0")?.focus({ preventScroll: true });
+}
+function practiseTopic(d, t) { run.filter = d || "all"; run.topic = t || null; run.mode = "practice"; startQuestion("practice"); go("practice"); }
+
+document.addEventListener("click", e => {
+  const t = e.target.closest("button, a");
+  if (!t) return;
+  if (t.dataset.view) return go(t.dataset.view);
+  if (t.dataset.goto) return go(t.dataset.goto);
+  if (t.dataset.filter) { run.filter = t.dataset.filter; run.topic = null; startQuestion("practice"); return render(); }
+  if (t.dataset.opt !== undefined && !run.done) {
+    run.picked = +t.dataset.opt; render();
+    const c = document.getElementById("conf-panel");
+    if (c && c.getBoundingClientRect().bottom > window.innerHeight) c.scrollIntoView({ block: "nearest", behavior: reduceMotion() ? "auto" : "smooth" });
+    document.getElementById("conf-sure")?.focus({ preventScroll: true });
+    return;
+  }
+  if (t.dataset.conf) return lock(t.dataset.conf);
+  if (t.id === "next") return nextQ();
+  if (t.id === "buddy-toggle") { run.buddyOpen = !run.buddyOpen; render(); document.getElementById("buddy-toggle")?.focus({ preventScroll: true }); return; }
+  if (t.id === "copy-prompt") {
+    const ta = document.getElementById("buddy-text");
+    const fallback = () => { ta.focus(); ta.select(); toast("Text selected. Press Ctrl+C or Cmd+C to copy."); };
+    try { navigator.clipboard.writeText(ta.value).then(() => toast("Prompt copied"), fallback); } catch (err) { fallback(); }
+    return;
+  }
+  const a = t.dataset.action;
+  if (a === "sample") { loadSample(); return render(); }
+  if (a === "practice-domain") return practiseTopic(t.dataset.domain, null);
+  if (a === "practice-topic") return practiseTopic(t.dataset.domain, t.dataset.topic);
+  if (a === "clear-topic") { run.topic = null; startQuestion("practice"); return render(); }
+  if (a === "reset") {
+    if (t.dataset.armed) {
+      state = freshState(); save(); run.session = []; run.q = null; run.mode = null; run.topic = null;
+      t.textContent = "Reset my progress"; delete t.dataset.armed; updateCount(); render(); toast("Progress reset");
+    } else {
+      t.dataset.armed = "1"; t.textContent = "Tap again to confirm reset";
+      setTimeout(() => { if (t.dataset.armed) { delete t.dataset.armed; t.textContent = "Reset my progress"; } }, 4000);
+    }
+  }
+});
+
+document.addEventListener("change", e => {
+  if (e.target.id === "buddy-lang" || e.target.id === "buddy-place") {
+    buddyLang = document.getElementById("buddy-lang").value; buddyPlace = document.getElementById("buddy-place").value;
+    try { localStorage.setItem("wingu-buddy", JSON.stringify({ lang: buddyLang, place: buddyPlace })); } catch (err) {}
+    document.getElementById("buddy-text").value = buddyPrompt(run.q);
+  }
+  if (e.target.id === "exam-date" || e.target.id === "hours") {
+    examDate = document.getElementById("exam-date").value;
+    hoursPerWeek = Math.max(1, Math.min(40, +document.getElementById("hours").value || 1));
+    try { localStorage.setItem("wingu-plan", JSON.stringify({ date: examDate, hours: hoursPerWeek })); } catch (err) {}
+    const id = e.target.id; render(); document.getElementById(id)?.focus({ preventScroll: true });
+  }
+});
+
+/* Keyboard: 1–4 pick an answer, S/T/G lock in confidence, N for next */
+document.addEventListener("keydown", e => {
+  if (!["practice", "rudia"].includes(run.view) || !run.q || e.target.matches("input, select, textarea") || e.ctrlKey || e.metaKey || e.altKey) return;
+  const k = e.key.toLowerCase();
+  if (!run.done && ["1", "2", "3", "4"].includes(k)) { run.picked = run.order[+k - 1]; render(); }
+  else if (!run.done && run.picked !== null && ({ s: "sure", t: "think", g: "guess" })[k]) lock(({ s: "sure", t: "think", g: "guess" })[k]);
+  else if (run.done && k === "n") nextQ();
+});
+
+/* Example learner, so judges can see the dashboard and planner without answering 40 questions */
+function loadSample() {
+  state = freshState();
+  const now = Date.now();
+  let seed = 900;
+  const rand = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+  const pattern = { d1: [0.85, "sure"], d2: [0.55, "think"], d3: [0.7, "think"] };
+  QUESTIONS.forEach((q, i) => {
+    const [p, c] = pattern[q.d];
+    const r = rand(); // seeded, so the demo looks the same every time
+    const ok = r < p;
+    const conf = ok ? (rand() < 0.15 ? "guess" : c) : (rand() < 0.3 ? "sure" : "think");
+    state.log.push({ id: q.id, ok, conf, pick: ok ? q.a : (q.a + 1) % 4, t: now - (40 - i) * 6e4 });
+    updateBox(q.id, ok, conf);
+  });
+  save(); updateCount(); toast("Sample learner loaded");
+}
+
+/* Show today's proverb */
+(function () { const j = JINA[new Date().getDate() % JINA.length]; document.querySelectorAll(".jina-sw").forEach(el => el.textContent = j[0]); document.querySelectorAll(".jina-en").forEach(el => el.textContent = j[1]); })();
+
+const start = (location.hash || "").slice(1);
+run.view = VIEWS[start] ? start : "home";
+updateCount(); render();
+
+</script>
